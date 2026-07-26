@@ -1,0 +1,152 @@
+/*
+ * Design tokens for the skatelawrence.com rebuild.
+ * Values transcribed verbatim from the live site's WordPress/Elementor
+ * global kit `:root` CSS custom-property block. Original `--vamtam-*` names
+ * are noted in comments for traceability back to source.
+ */
+
+:root {
+  /* Colors */
+  --color-white: #ffffff; /* WP default-bg / accent-5 / accent-7 (identical) */
+  --color-ink: #1d1c1c; /* WP accent-6 — primary text/link, sticky header bg, button hover bg */
+  --color-teal: #1cb1d9; /* WP accent-2 */
+  --color-cream-1: #f8f9f3; /* WP accent-3 */
+  --color-cream-2: #f8f5ef; /* WP accent-4 */
+  --color-cream-3: #fcf8f1; /* WP accent-8 */
+  --color-highlight-yellow: #eed338; /* WP accent-1 — underline highlight marker color */
+  --color-button-yellow: #fec415; /* WP --vamtam-btn-bg-color */
+
+  --color-button-bg: var(--color-button-yellow);
+  --color-button-text: var(--color-ink);
+  --color-button-bg-hover: var(--color-ink);
+  --color-button-text-hover: var(--color-white);
+
+  /* Radius */
+  --radius-none: 0px; /* WP global border-radius default */
+  --radius-pill: 30px; /* confirmed button override */
+  /* Button padding (18px 55px) is intentionally NOT tokenized — a single-
+     component value, applied directly in the Header/Donate-button phase. */
+
+  /* Spacing (Elementor's ad hoc set, named by ascending magnitude) */
+  --space-xs: 20px; /* WP --vamtam-small-padding */
+  --space-sm: 30px; /* WP --vamtam-vertical-padding */
+  --space-md: 50px; /* WP --vamtam-horizontal-padding */
+  --space-lg: 60px; /* WP --vamtam-horizontal-padding-large /
+                        --vamtam-vertical-padding-large /
+                        --vamtam-box-outer-padding (identical, collapsed) */
+  --space-content-fluid: min(6vh, 35px); /* WP --vamtam-content-space-l (desktop) */
+
+  /* Layout */
+  --container-max-width: 1260px;
+
+  /* Font family & weight primitives */
+  --font-family-base: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Type scale — desktop (default) */
+  --font-size-body: 16px;
+  --line-height-body: 1.875em;
+  --letter-spacing-body: normal;
+  --font-weight-body: var(--font-weight-regular);
+
+  --font-size-h1: 70px;
+  --line-height-h1: 1.29em;
+  --letter-spacing-h1: normal;
+  --font-weight-h1: var(--font-weight-bold);
+
+  --font-size-h2: 50px;
+  --line-height-h2: 1.2em;
+  --letter-spacing-h2: normal;
+  --font-weight-h2: var(--font-weight-bold);
+
+  --font-size-h3: 24px;
+  --line-height-h3: 1.33em;
+  --letter-spacing-h3: normal;
+  --font-weight-h3: var(--font-weight-bold);
+
+  --font-size-h4: 20px;
+  --line-height-h4: 1.5em;
+  --letter-spacing-h4: normal;
+  --font-weight-h4: var(--font-weight-medium);
+  --text-transform-h4: uppercase;
+
+  --font-size-h5: 18px;
+  --line-height-h5: 1.44em;
+  --letter-spacing-h5: normal;
+  --font-weight-h5: var(--font-weight-semibold);
+
+  --font-size-h6: 16px;
+  --line-height-h6: 1.5em;
+  --letter-spacing-h6: normal;
+  --font-weight-h6: var(--font-weight-bold);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --space-content-fluid: 25px; /* WP --vamtam-content-space-l (tablet/phone) */
+
+    --font-size-body: 16px;
+    --line-height-body: 1.7em;
+    --letter-spacing-body: 0.2px;
+
+    --font-size-h1: 50px;
+    --line-height-h1: 1.4em;
+    --letter-spacing-h1: 0.2px;
+
+    --font-size-h2: 30px;
+    --line-height-h2: 1.5em;
+    --letter-spacing-h2: 0.2px;
+
+    --font-size-h3: 22px;
+    --line-height-h3: 1.5em;
+    --letter-spacing-h3: 0.2px;
+
+    --font-size-h4: 20px;
+    --line-height-h4: 1.4em;
+    --letter-spacing-h4: 0.2px;
+
+    --font-size-h5: 16px;
+    --line-height-h5: 1.5em;
+    --letter-spacing-h5: 0.2px;
+
+    --font-size-h6: 12px;
+    --line-height-h6: 1.5em;
+    --letter-spacing-h6: 0.3px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-size-body: 15px;
+    --line-height-body: 1.7em;
+    --letter-spacing-body: 0.2px;
+
+    --font-size-h1: 35px;
+    --line-height-h1: 1.4em;
+    --letter-spacing-h1: 0.1px;
+
+    --font-size-h2: 26px;
+    --line-height-h2: 1.5em;
+    --letter-spacing-h2: 0.2px;
+
+    --font-size-h3: 22px;
+    --line-height-h3: 1.5em;
+    --letter-spacing-h3: 0.2px;
+
+    --font-size-h4: 18px;
+    --line-height-h4: 1.6em;
+    --letter-spacing-h4: 0.3px;
+
+    --font-size-h5: 15px;
+    --line-height-h5: 1.6em;
+    --letter-spacing-h5: 0.3px;
+
+    --font-size-h6: 12px;
+    --line-height-h6: 1.25em;
+    --letter-spacing-h6: 1px;
+  }
+}
