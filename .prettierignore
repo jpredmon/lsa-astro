@@ -1,3 +1,4 @@
 dist
 .astro
 node_modules
+lsa-site-migration-spec.md

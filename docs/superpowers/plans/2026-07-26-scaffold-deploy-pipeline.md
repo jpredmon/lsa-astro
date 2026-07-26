@@ -9,6 +9,7 @@
 **Tech Stack:** Astro (latest), TypeScript (`astro/tsconfigs/strictest`), ESLint flat config + `eslint-plugin-astro`, Oxlint, Prettier + `prettier-plugin-astro`, `@astrojs/sitemap`, Cloudflare Pages + Wrangler CLI.
 
 ## Global Constraints
+
 - TypeScript strict mode always, no implicit `any` (user's global convention) — enforced here via Astro's `strictest` tsconfig preset.
 - Named exports preferred over default exports where applicable.
 - No new functionality beyond what's specified — no speculative config for features not yet built (e.g. no analytics, no CSP allowances for assets that don't exist yet).
@@ -24,6 +25,7 @@
 This plan covers **Phase 1 only**. Each later phase gets its own plan once the prior phase's real output is known — a 9-phase migration doesn't belong in one document.
 
 **Research done before writing this plan:**
+
 - **Legacy project found**: `C:\dev\claude-practice\lsa-site-react-legacy` (Vite+React+TS) is the "current project" the spec references. It has `AnimatedUnderline` (donate-button hover, built with CSS `clip-path` — **not** stroke-dasharray as the spec guessed) and `CursorDot` (rAF cursor trail), plus `Header`/`Hero`/`AnimatedHeadline`/`Nav`/`Logo`/`DonateButton` components and lint/format tooling. No About/Parks/WhoWeAre/Footer exist there yet.
 - **Live site fetched directly**: `skatelawrence.com` blocks bare `curl`/WebFetch with a Cloudflare JS challenge (confirms Cloudflare already proxies this domain's DNS — relevant to spec §9), but a realistic browser User-Agent gets through cleanly. Confirmed: font is Poppins, self-hosted by Elementor at weights 300/400/500/600/700 **normal style only** (no italic actually used, despite Elementor loading all 18 weight/style variants — a page-weight fix for later). Confirmed nav structure, hero `data-settings` (matches spec §7 verbatim), PayPal link, Instagram/Facebook URLs, MOKAN SKATES/Harrison Street DIY links, and decoded the Cloudflare-obfuscated contact email: **lawrenceskatersassociation@gmail.com**. MonsterInsights is installed but **unconfigured — no analytics are actually live today**.
 - **Decisions closed with the user**: no analytics in the rebuild. GitHub repo created manually by the user (not via `gh` CLI — not authenticated in this environment).
@@ -68,6 +70,7 @@ LSA-astro/
 ## Task 1: Initialize git repo
 
 **Files:**
+
 - Modify: none (repo metadata only)
 
 - [ ] **Step 1: Init repo and commit the spec**
@@ -90,6 +93,7 @@ Expected: one commit; `git status` clean.
 ## Task 2: Scaffold Astro (minimal template)
 
 **Files:**
+
 - Create: `astro.config.mjs`, `package.json`, `tsconfig.json`, `src/pages/index.astro`, `public/favicon.svg`, `.gitignore`
 
 - [ ] **Step 1: Move spec aside, scaffold, restore spec**
@@ -120,6 +124,7 @@ git commit -m "feat: scaffold Astro minimal template"
 ## Task 3: Install dependencies
 
 **Files:**
+
 - Create: `package-lock.json`, `node_modules/`
 
 - [ ] **Step 1: Install**
@@ -138,6 +143,7 @@ Expected: no error, prints `http://localhost:4321` or similar.
 ```bash
 git status --porcelain package-lock.json
 ```
+
 If it shows a diff: `git add package-lock.json && git commit -m "chore: lock base dependencies"`. Otherwise skip.
 
 ---
@@ -145,6 +151,7 @@ If it shows a diff: `git add package-lock.json && git commit -m "chore: lock bas
 ## Task 4: Sitemap integration
 
 **Files:**
+
 - Modify: `astro.config.mjs`, `package.json`, `package-lock.json`
 
 - [ ] **Step 1: Add the integration**
@@ -183,6 +190,7 @@ git commit -m "feat: add sitemap integration"
 ## Task 5: Strict TypeScript
 
 **Files:**
+
 - Modify: `tsconfig.json`
 
 - [ ] **Step 1: Edit tsconfig.json**
@@ -212,6 +220,7 @@ git commit -m "chore: enable strictest TypeScript config"
 ## Task 6: Port lint/format tooling (Astro-adapted)
 
 **Files:**
+
 - Create: `eslint.config.js`, `.oxlintrc.json`, `.prettierrc`, `.prettierignore`
 - Modify: `package.json`
 
@@ -262,6 +271,7 @@ export default tseslint.config(
 - [ ] **Step 4: Create .prettierrc and .prettierignore**
 
 `.prettierrc`:
+
 ```json
 {
   "semi": true,
@@ -275,6 +285,7 @@ export default tseslint.config(
 ```
 
 `.prettierignore`:
+
 ```
 dist
 .astro
@@ -284,6 +295,7 @@ node_modules
 - [ ] **Step 5: Add npm scripts**
 
 Edit `package.json` `scripts`:
+
 ```json
 {
   "scripts": {
@@ -317,6 +329,7 @@ git commit -m "chore: port lint/format tooling from legacy project"
 ## Task 7: Placeholder pages, security headers, robots.txt
 
 **Files:**
+
 - Create: `src/layouts/BaseLayout.astro`, `src/pages/404.astro`, `public/_headers`, `public/robots.txt`, `.node-version`
 - Modify: `src/pages/index.astro`
 
@@ -329,6 +342,7 @@ interface Props {
 }
 const { title } = Astro.props;
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -347,6 +361,7 @@ const { title } = Astro.props;
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="Lawrence Skateparks Association">
   <main>
     <h1>Lawrence Skateparks Association</h1>
@@ -361,6 +376,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="404 — Page Not Found | Lawrence Skateparks Association">
   <main>
     <h1>404 — Page not found</h1>
@@ -369,7 +385,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-- [ ] **Step 4: Create public/_headers**
+- [ ] **Step 4: Create public/\_headers**
 
 ```
 /*
@@ -398,7 +414,9 @@ Sitemap: https://skatelawrence.com/sitemap-index.xml
 npm run build
 npx astro preview
 ```
+
 Expected:
+
 - `dist/index.html` contains "Lawrence Skateparks Association"
 - `dist/404.html` exists
 - `dist/_headers` and `dist/robots.txt` exist with exact content above
@@ -420,6 +438,7 @@ git commit -m "feat: add placeholder pages, security headers, robots.txt"
 - [ ] **Step 1 (USER ACTION REQUIRED): authenticate wrangler**
 
 `npx wrangler whoami` currently reports not logged in. Run interactively (e.g. via `! npx wrangler login` in the Claude Code session so output lands in the transcript):
+
 ```bash
 npx wrangler login
 ```
@@ -438,6 +457,7 @@ npx wrangler pages deploy dist --project-name=lsa-astro --branch=main
 curl -sI https://lsa-astro.pages.dev | grep -i -E "content-security-policy|x-frame-options"
 curl -s https://lsa-astro.pages.dev | grep "Lawrence Skateparks Association"
 ```
+
 Expected: both commands find matches, confirming the preview URL is live with the security headers active.
 
 ---
@@ -470,12 +490,14 @@ Confirm the dashboard-triggered build's `*.pages.dev` URL matches Task 8's outpu
 ## Scope for Phase 2 onward (legacy project boundary)
 
 `lsa-site-react-legacy` is **not** a markup/styling source for the rebuild. Header/Nav/Hero/Logo/DonateButton (and every later section) get built fresh from the live `skatelawrence.com` fetch — its actual DOM structure, classes, `data-settings`, copy, and computed styles — not from the legacy React components, which were an earlier, incomplete, pre-spec attempt. The only two things carried over from that folder are:
+
 1. **`screenshots/`** — kept as historical record of prior failed attempts (e.g. `stroke-not-quite.png`).
-2. **`AnimatedUnderline` / `CursorDot` timing and easing values** — reusable *if* they check out against a live-site re-diff (spec §7 flags `AnimatedUnderline` needs this verification before being treated as final). If the live site's actual easing/timing differs, the live site wins.
+2. **`AnimatedUnderline` / `CursorDot` timing and easing values** — reusable _if_ they check out against a live-site re-diff (spec §7 flags `AnimatedUnderline` needs this verification before being treated as final). If the live site's actual easing/timing differs, the live site wins.
 
 Everything else in that folder (component structure, CSS Modules architecture, component implementations, `tokens.css`) is disregarded for markup/styling purposes.
 
 ## What's explicitly deferred to later phases
+
 - Real design tokens (colors, Poppins weights 300/400/500/600/700, spacing, breakpoints), favicon/logo — Phase 2
 - Header/Nav, Hero (incl. both animations), About, Parks, Who We Are, Donate, Footer — Phases 3–9, built fresh from the live site per the scope note above
 - Custom domain cutover to `skatelawrence.com` — final phase per spec §9
@@ -483,6 +505,7 @@ Everything else in that folder (component structure, CSS Modules architecture, c
 - CSP loosening for fonts/images once Phase 2 picks the actual asset hosting approach
 
 ## Verification summary for this phase
+
 1. `npm run build`, `npm run check`, `npm run lint`, `npm run format` all pass locally.
 2. Local `astro preview` shows placeholder homepage + working 404.
 3. `https://lsa-astro.pages.dev` (or dashboard-connected equivalent) is reachable, serves the placeholder, and returns the CSP/X-Frame-Options headers.
