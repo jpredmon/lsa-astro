@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+
+import logoMaster from '../../assets/branding/logo-master.png';
+
+interface Props {
+  variant: 'desktop' | 'mobile';
+}
+
+const { variant } = Astro.props;
+---
+
+<a
+  href="/"
+  class={`logo-link logo-link--${variant}`}
+  aria-label="Lawrence Skaters Association home"
+>
+  <Image
+    src={logoMaster}
+    alt="Lawrence Skaters Association logo"
+    width={320}
+    height={320}
+    format="webp"
+    loading="eager"
+    class="logo-image"
+  />
+</a>
+
+<style>
+  .logo-link {
+    display: block;
+    line-height: 0;
+  }
+
+  .logo-image {
+    display: block;
+    height: auto;
+  }
+
+  /* Desktop: fixed 160px cap — measured live via getBoundingClientRect (160x160). */
+  .logo-link--desktop .logo-image {
+    width: 160px;
+  }
+
+  /* Mobile/tablet: fills its grid column. Confirmed from static source CSS:
+     100% width at tablet (768-1024px), overridden to 80% at phone (<=767px). */
+  .logo-link--mobile .logo-image {
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .logo-link--mobile .logo-image {
+      width: 80%;
+    }
+  }
+</style>
