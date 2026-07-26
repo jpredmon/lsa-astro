@@ -9,6 +9,7 @@
   /* Colors */
   --color-white: #ffffff; /* WP default-bg / accent-5 / accent-7 (identical) */
   --color-ink: #1d1c1c; /* WP accent-6 — primary text/link, sticky header bg, button hover bg */
+  --color-nav-active: #191919; /* distinct near-black, confirmed via live getComputedStyle on nav hover/active — NOT the same value as --color-ink */
   --color-teal: #1cb1d9; /* WP accent-2 */
   --color-cream-1: #f8f9f3; /* WP accent-3 */
   --color-cream-2: #f8f5ef; /* WP accent-4 */
