@@ -82,7 +82,7 @@ No changes to `public/_headers`, `astro.config.mjs`, or `breakpoints.ts`.
 
 - Modify: `src/styles/tokens.css`
 
-- [ ] **Step 1: Add the token**
+- [x] **Step 1: Add the token**
 
 Add directly below the existing `--color-ink` line:
 
@@ -90,11 +90,11 @@ Add directly below the existing `--color-ink` line:
 --color-nav-active: #191919; /* distinct near-black, confirmed via live getComputedStyle on nav hover/active — NOT the same value as --color-ink (#1D1C1C) */
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/tokens.css
@@ -109,7 +109,7 @@ git commit -m "feat: add nav active/hover color token"
 
 - Create: `src/components/header/Logo.astro`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```astro
 ---
@@ -170,11 +170,11 @@ const { variant } = Astro.props;
 </style>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/header/Logo.astro
@@ -189,7 +189,7 @@ git commit -m "feat: add Header logo component"
 
 - Create: `src/components/header/DonateButton.astro`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```astro
 ---
@@ -241,11 +241,11 @@ const DONATE_URL = 'https://www.paypal.com/donate/?hosted_button_id=A9V2ZVQJDLTS
 
 **Open item (flagged, not resolved):** no `target`/`rel` specified anywhere in source or live data — defaulting to same-tab.
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/header/DonateButton.astro
@@ -260,7 +260,7 @@ git commit -m "feat: add Header donate button component"
 
 - Create: `src/components/header/Nav.astro`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```astro
 ---
@@ -344,11 +344,11 @@ const navLinks: NavLink[] = [
 </style>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/header/Nav.astro
@@ -363,7 +363,7 @@ git commit -m "feat: add Header nav component"
 
 - Create: `src/components/Header.astro`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```astro
 ---
@@ -445,11 +445,11 @@ import Nav from './header/Nav.astro';
 </style>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/Header.astro
@@ -464,7 +464,7 @@ git commit -m "feat: compose desktop and mobile Header bars"
 
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Add import and render**
+- [x] **Step 1: Add import and render**
 
 Add to frontmatter (below existing CSS imports):
 
@@ -481,11 +481,11 @@ Body:
 </body>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`. If `simple-import-sort/imports` flags order, run `npx eslint src/layouts/BaseLayout.astro --fix`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/BaseLayout.astro
@@ -498,7 +498,7 @@ git commit -m "feat: render Header in BaseLayout"
 
 **Files:** none
 
-- [ ] **Step 1: Run full pipeline**
+- [x] **Step 1: Run full pipeline**
 
 ```bash
 npm run format && npm run lint && npm run check && npm run build
@@ -512,11 +512,11 @@ Expected: all exit 0. `dist/` contains built pages with header markup and a bund
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Start dev server and inspect**
+- [x] **Step 1: Start dev server and inspect**
 
 Navigate Chrome to `http://localhost:4321/`. Confirm via computed styles: logo 160×160, `.site-header` sticky/`z-index:100`/background `rgb(248,245,239)`, nav default color `rgb(29,28,28)`, "Home" `aria-current="page"` with `--color-nav-active` color and `::after opacity:1`, hover another link and confirm the crossfade, donate button transparent→black-fill on hover.
 
-- [ ] **Step 2: Screenshot and fix if needed**
+- [x] **Step 2: Screenshot and fix if needed**
 
 Fix + commit as `fix: correct Header desktop styling per live verification` if anything's off.
 
@@ -526,7 +526,7 @@ Fix + commit as `fix: correct Header desktop styling per live verification` if a
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Source-level confirmation**
+- [x] **Step 1: Source-level confirmation**
 
 Confirm `.site-header__bar--desktop` has `display:none` and `.site-header__bar--mobile` shows only logo+donate at ≤1024px in the written CSS (Task 5). Real breakpoint pixel verification deferred to the project's built-in Playwright QA pass in a later phase, given the `resize_window` environment limitation.
 
@@ -538,11 +538,11 @@ Confirm `.site-header__bar--desktop` has `display:none` and `.site-header__bar--
 
 - Create: `docs/superpowers/plans/2026-07-26-header-nav.md` (this file, checkboxes marked)
 
-- [ ] **Step 1: Push and verify production**
+- [x] **Step 1: Push and verify production**
 
 Push to `main`. Load `lsa-astro.pages.dev` fresh, confirm header renders and sticks on scroll in production.
 
-- [ ] **Step 2: Commit plan completion**
+- [x] **Step 2: Commit plan completion**
 
 ```bash
 git add docs/superpowers/plans/2026-07-26-header-nav.md
