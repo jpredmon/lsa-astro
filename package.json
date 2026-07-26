@@ -14,7 +14,8 @@
     "lint:oxlint": "oxlint .",
     "lint:eslint": "eslint .",
     "lint": "npm run lint:oxlint && npm run lint:eslint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "generate:favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
