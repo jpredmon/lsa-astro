@@ -91,7 +91,7 @@ LSA-astro/
 
 - Create: `src/styles/breakpoints.ts`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```ts
 /**
@@ -115,12 +115,12 @@ export const BREAKPOINTS = {
 } as const;
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run check && npm run lint`
 Expected: both pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/breakpoints.ts
@@ -135,7 +135,7 @@ git commit -m "docs: document breakpoint constants for future JS use"
 
 - Create: `src/styles/tokens.css`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```css
 /*
@@ -292,12 +292,12 @@ git commit -m "docs: document breakpoint constants for future JS use"
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run build && npm run lint && npm run format`
 Expected: all pass. Manually diff every value against this doc's table — highest-stakes accuracy check in the phase.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/tokens.css
@@ -312,7 +312,7 @@ git commit -m "feat: add design tokens (colors, spacing, radius, container, typo
 
 - Create: `public/fonts/poppins-300.woff2`, `poppins-400.woff2`, `poppins-500.woff2`, `poppins-600.woff2`, `poppins-700.woff2`
 
-- [ ] **Step 1: Download**
+- [x] **Step 1: Download**
 
 ```bash
 mkdir -p public/fonts
@@ -323,11 +323,11 @@ curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML
 curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" -o public/fonts/poppins-700.woff2 "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2"
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 All 5 files exist, exact sizes 7840/7884/7748/8000/7816 bytes respectively. First 4 bytes of each = `wOF2` magic (hex `774f4632`).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add public/fonts
@@ -342,7 +342,7 @@ git commit -m "feat: self-host Poppins font files (weights 300/400/500/600/700, 
 
 - Create: `src/styles/fonts.css`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```css
 /*
@@ -411,12 +411,12 @@ git commit -m "feat: self-host Poppins font files (weights 300/400/500/600/700, 
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run format`
 Expected: both pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/fonts.css
@@ -431,7 +431,7 @@ git commit -m "feat: add @font-face declarations for self-hosted Poppins"
 
 - Create: `src/styles/base.css`
 
-- [ ] **Step 1: Create the file**
+- [x] **Step 1: Create the file**
 
 ```css
 *,
@@ -509,12 +509,12 @@ a {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run build && npm run lint && npm run format`
 Expected: all pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/base.css
@@ -529,7 +529,7 @@ git commit -m "feat: add global body/heading base styles consuming design tokens
 
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Edit the file**
+- [x] **Step 1: Edit the file**
 
 ```astro
 ---
@@ -558,11 +558,11 @@ const { title } = Astro.props;
 
 (Favicon `<link>` tags added in Task 9, once those files exist.)
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Start dev server in background, load `localhost:4321`. Confirm in devtools: `h1` computed `font-family` is Poppins, `font-weight: 700`, `font-size: 70px` at desktop width, shrinking to 50px/35px at ≤1024px/≤767px. Confirm `font-weight: 400` on the `<p>`. Stop the dev server. Then `npm run build && npm run check && npm run lint && npm run format`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/BaseLayout.astro
@@ -578,7 +578,7 @@ git commit -m "feat: wire design tokens, fonts, and base styles into BaseLayout"
 - Modify: `package.json`, `package-lock.json`
 - Create: `src/assets/branding/logo-master.png`
 
-- [ ] **Step 1: Install and fetch**
+- [x] **Step 1: Install and fetch**
 
 ```bash
 npm install -D sharp png-to-ico
@@ -586,12 +586,12 @@ mkdir -p src/assets/branding
 curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" -o src/assets/branding/logo-master.png "https://skatelawrence.com/wp-content/uploads/2020/04/logo-512x512-1.png"
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `node -e "require('sharp')('src/assets/branding/logo-master.png').metadata().then(m => console.log(m.width, m.height, m.format))"`
 Expected: prints `512 512 png`. `npm run lint` passes.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add package.json package-lock.json src/assets/branding/logo-master.png
@@ -609,7 +609,7 @@ git commit -m "chore: add favicon-generation deps, fetch master logo asset"
 - Create: `public/favicon.ico` (replace), `public/favicon-32x32.png`, `public/icon-192.png`, `public/apple-touch-icon.png`
 - Delete: `public/favicon.svg`
 
-- [ ] **Step 1: Create the generator script**
+- [x] **Step 1: Create the generator script**
 
 ```js
 // One-off (but re-runnable) favicon generator. Regenerates all static favicon
@@ -653,18 +653,18 @@ main().catch((err) => {
 });
 ```
 
-- [ ] **Step 2: Add npm script**
+- [x] **Step 2: Add npm script**
 
 Add to `package.json` `scripts`: `"generate:favicons": "node scripts/generate-favicons.mjs"`
 
-- [ ] **Step 3: Run it and remove the starter placeholder**
+- [x] **Step 3: Run it and remove the starter placeholder**
 
 ```bash
 npm run generate:favicons
 rm public/favicon.svg
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 - 4 files exist in `public/`: `favicon.ico`, `favicon-32x32.png`, `icon-192.png`, `apple-touch-icon.png`; `favicon.svg` no longer exists.
 - `favicon.ico` first 4 bytes = `00 00 01 00` (valid ICO magic header).
@@ -672,7 +672,7 @@ rm public/favicon.svg
 - Visually open `apple-touch-icon.png` — confirm it's recognizably the LSA logo.
 - `npm run lint && npm run format` pass.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add scripts/generate-favicons.mjs package.json public/favicon.ico public/favicon-32x32.png public/icon-192.png public/apple-touch-icon.png
@@ -688,7 +688,7 @@ git commit -m "feat: generate real static favicons from master logo, drop starte
 
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Add favicon links**
+- [x] **Step 1: Add favicon links**
 
 Add inside `<head>`, after the font preload:
 
@@ -699,11 +699,11 @@ Add inside `<head>`, after the font preload:
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run build`, preview locally — browser tab shows the LSA logo favicon. `npm run check && npm run lint && npm run format` pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/BaseLayout.astro
@@ -716,7 +716,7 @@ git commit -m "feat: link favicon and apple-touch-icon in BaseLayout head"
 
 **Files:** none
 
-- [ ] **Step 1: Full pipeline check**
+- [x] **Step 1: Full pipeline check**
 
 ```bash
 npm run format && npm run lint && npm run check && npm run build
@@ -724,15 +724,15 @@ npm run format && npm run lint && npm run check && npm run build
 
 Expected: all exit 0. `dist/` contains bundled CSS, `dist/fonts/poppins-*.woff2`, `dist/favicon.ico`, `dist/favicon-32x32.png`, `dist/icon-192.png`, `dist/apple-touch-icon.png`.
 
-- [ ] **Step 2: Confirm no CSP change needed**
+- [x] **Step 2: Confirm no CSP change needed**
 
 `cat public/_headers` — confirm unchanged from Phase 1.
 
-- [ ] **Step 3: Push and verify live deploy**
+- [x] **Step 3: Push and verify live deploy**
 
 Push to `main` (triggers the Phase-1-verified auto-deploy pipeline). Load the live preview, confirm Poppins renders (not a fallback sans-serif) and the favicon shows in the tab.
 
-- [ ] **Step 4: Mark this plan complete**
+- [x] **Step 4: Mark this plan complete**
 
 ```bash
 git add docs/superpowers/plans/2026-07-26-design-tokens.md
