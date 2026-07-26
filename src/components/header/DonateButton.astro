@@ -1,0 +1,45 @@
+---
+interface Props {
+  variant: 'desktop' | 'mobile';
+}
+
+const { variant } = Astro.props;
+
+const DONATE_URL = 'https://www.paypal.com/donate/?hosted_button_id=A9V2ZVQJDLTSQ&source=qr';
+---
+
+<a href={DONATE_URL} class={`donate-button donate-button--${variant}`}>Donate</a>
+
+<style>
+  .donate-button {
+    display: inline-block;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .donate-button--desktop {
+    padding: 18px 55px;
+    background-color: transparent;
+    border: 2.4px solid var(--color-ink);
+    color: var(--color-ink);
+    transition: all 0.3s ease;
+  }
+
+  .donate-button--desktop:hover,
+  .donate-button--desktop:focus-visible {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .donate-button--mobile {
+    padding: 12px 35px;
+    background-color: var(--color-highlight-yellow);
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    font-size: var(--font-size-h6);
+  }
+</style>
