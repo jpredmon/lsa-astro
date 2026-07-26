@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skatelawrence.com/sitemap-index.xml
