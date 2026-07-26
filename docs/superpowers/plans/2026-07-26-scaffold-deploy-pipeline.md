@@ -435,7 +435,7 @@ git commit -m "feat: add placeholder pages, security headers, robots.txt"
 
 **Files:** none (deploy only)
 
-- [ ] **Step 1 (USER ACTION REQUIRED): authenticate wrangler**
+- [x] **Step 1 (USER ACTION REQUIRED): authenticate wrangler**
 
 `npx wrangler whoami` currently reports not logged in. Run interactively (e.g. via `! npx wrangler login` in the Claude Code session so output lands in the transcript):
 
@@ -443,7 +443,7 @@ git commit -m "feat: add placeholder pages, security headers, robots.txt"
 npx wrangler login
 ```
 
-- [ ] **Step 2: Create project and deploy**
+- [x] **Step 2: Create project and deploy**
 
 ```bash
 npx wrangler pages project create lsa-astro --production-branch main
@@ -451,7 +451,7 @@ npm run build
 npx wrangler pages deploy dist --project-name=lsa-astro --branch=main
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 curl -sI https://lsa-astro.pages.dev | grep -i -E "content-security-policy|x-frame-options"
@@ -466,22 +466,22 @@ Expected: both commands find matches, confirming the preview URL is live with th
 
 **Files:** none (external service wiring)
 
-- [ ] **Step 1 (USER ACTION REQUIRED): create GitHub repo**
+- [x] **Step 1 (USER ACTION REQUIRED): create GitHub repo**
 
 Create a repo (e.g. `lsa-astro`) at github.com and share the URL back.
 
-- [ ] **Step 2: Add remote and push**
+- [x] **Step 2: Add remote and push**
 
 ```bash
 git remote add origin <the-repo-url>
 git push -u origin main
 ```
 
-- [ ] **Step 3 (USER ACTION REQUIRED): connect Cloudflare Pages dashboard**
+- [x] **Step 3 (USER ACTION REQUIRED): connect Cloudflare Pages dashboard**
 
 Cloudflare dashboard → Workers & Pages → Create → Pages → "Connect to Git" → authorize the repo → set production branch `main`, build command `npm run build`, output directory `dist` (set `NODE_VERSION=22` as a build env var if the dashboard doesn't pick up `.node-version` automatically) → Deploy.
 
-- [ ] **Step 4: Verify pipeline end-to-end**
+- [x] **Step 4: Verify pipeline end-to-end**
 
 Confirm the dashboard-triggered build's `*.pages.dev` URL matches Task 8's output. Push a trivial change (e.g. a `README.md` edit) and confirm a new deployment fires automatically.
 
