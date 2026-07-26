@@ -1,0 +1,79 @@
+---
+interface NavLink {
+  href: string;
+  label: string;
+  current?: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { href: '/', label: 'Home', current: true },
+  { href: '#about-us-id', label: 'About Us' },
+  { href: '#parks-id', label: 'Our Parks' },
+  { href: '#contact-id', label: 'Contact' },
+];
+---
+
+<nav class="site-nav" aria-label="Primary">
+  <ul class="site-nav__list">
+    {
+      navLinks.map((link) => (
+        <li class="site-nav__item">
+          <a
+            href={link.href}
+            class="site-nav__link"
+            aria-current={link.current ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px; /* measured live via getBoundingClientRect between nav items */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav__link {
+    position: relative;
+    display: inline-block;
+    padding: 1px 0;
+    font-family: var(--font-family-base);
+    font-size: 16px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-nav-active);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.58, 0.3, 0.005, 1);
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible,
+  .site-nav__link[aria-current='page'] {
+    color: var(--color-nav-active);
+  }
+
+  .site-nav__link:hover::after,
+  .site-nav__link:focus-visible::after,
+  .site-nav__link[aria-current='page']::after {
+    opacity: 1;
+  }
+</style>
