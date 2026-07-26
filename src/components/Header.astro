@@ -1,0 +1,77 @@
+---
+import DonateButton from './header/DonateButton.astro';
+import Logo from './header/Logo.astro';
+import Nav from './header/Nav.astro';
+---
+
+<header class="site-header">
+  <div class="site-header__bar site-header__bar--desktop">
+    <div class="site-header__logo">
+      <Logo variant="desktop" />
+    </div>
+    <Nav />
+    <div class="site-header__donate site-header__donate--desktop">
+      <DonateButton variant="desktop" />
+    </div>
+  </div>
+
+  <div class="site-header__bar site-header__bar--mobile">
+    <div class="site-header__logo">
+      <Logo variant="mobile" />
+    </div>
+    <div class="site-header__donate site-header__donate--mobile">
+      <DonateButton variant="mobile" />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: var(--color-cream-2);
+  }
+
+  .site-header__bar--desktop {
+    display: grid;
+    grid-template-columns: 17% 1fr 25%;
+    align-items: center;
+    padding: 10px var(--space-sm);
+  }
+
+  .site-header__donate--desktop {
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-header__bar--mobile {
+    display: none;
+  }
+
+  /* Elementor 3-tier breakpoints — see src/styles/breakpoints.ts */
+  @media (max-width: 1024px) {
+    .site-header__bar--desktop {
+      display: none;
+    }
+
+    .site-header__bar--mobile {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      align-items: center;
+      padding: 10px var(--space-sm);
+    }
+
+    .site-header__donate--mobile {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .site-header__bar--mobile {
+      grid-template-columns: 45% 55%;
+    }
+  }
+</style>
