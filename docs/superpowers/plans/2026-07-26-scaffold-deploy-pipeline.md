@@ -73,7 +73,7 @@ LSA-astro/
 
 - Modify: none (repo metadata only)
 
-- [ ] **Step 1: Init repo and commit the spec**
+- [x] **Step 1: Init repo and commit the spec**
 
 ```bash
 cd "C:\dev\claude-practice\LSA-astro"
@@ -83,7 +83,7 @@ git add lsa-site-migration-spec.md
 git commit -m "docs: add migration spec"
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `git log --oneline`
 Expected: one commit; `git status` clean.
@@ -96,7 +96,7 @@ Expected: one commit; `git status` clean.
 
 - Create: `astro.config.mjs`, `package.json`, `tsconfig.json`, `src/pages/index.astro`, `public/favicon.svg`, `.gitignore`
 
-- [ ] **Step 1: Move spec aside, scaffold, restore spec**
+- [x] **Step 1: Move spec aside, scaffold, restore spec**
 
 ```bash
 cd "C:\dev\claude-practice\LSA-astro"
@@ -107,12 +107,12 @@ mv ../lsa-site-migration-spec.md.bak ./lsa-site-migration-spec.md
 
 (`create-astro` scaffolds into a new subdirectory instead of in-place if the target dir isn't empty — hence the move-out/move-back. `--no-git` because Task 1 already ran `git init`.)
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `ls astro.config.mjs package.json src/pages/index.astro`
 Expected: all three exist.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add -A
@@ -127,18 +127,18 @@ git commit -m "feat: scaffold Astro minimal template"
 
 - Create: `package-lock.json`, `node_modules/`
 
-- [ ] **Step 1: Install**
+- [x] **Step 1: Install**
 
 ```bash
 npm install
 ```
 
-- [ ] **Step 2: Verify dev server binds**
+- [x] **Step 2: Verify dev server binds**
 
 Run: `npm run dev` (then stop it once it prints a local URL, e.g. Ctrl+C)
 Expected: no error, prints `http://localhost:4321` or similar.
 
-- [ ] **Step 3: Commit (only if lockfile changed)**
+- [x] **Step 3: Commit (only if lockfile changed)**
 
 ```bash
 git status --porcelain package-lock.json
@@ -154,13 +154,13 @@ If it shows a diff: `git add package-lock.json && git commit -m "chore: lock bas
 
 - Modify: `astro.config.mjs`, `package.json`, `package-lock.json`
 
-- [ ] **Step 1: Add the integration**
+- [x] **Step 1: Add the integration**
 
 ```bash
 npx astro add sitemap -y
 ```
 
-- [ ] **Step 2: Set `site` in astro.config.mjs**
+- [x] **Step 2: Set `site` in astro.config.mjs**
 
 ```js
 // @ts-check
@@ -173,12 +173,12 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run build`
 Expected: `dist/sitemap-index.xml` and `dist/sitemap-0.xml` exist; `dist/sitemap-0.xml` references `https://skatelawrence.com/`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add astro.config.mjs package.json package-lock.json
@@ -193,7 +193,7 @@ git commit -m "feat: add sitemap integration"
 
 - Modify: `tsconfig.json`
 
-- [ ] **Step 1: Edit tsconfig.json**
+- [x] **Step 1: Edit tsconfig.json**
 
 ```json
 {
@@ -203,12 +203,12 @@ git commit -m "feat: add sitemap integration"
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npx astro check`
 Expected: passes with no errors.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add tsconfig.json
@@ -224,13 +224,13 @@ git commit -m "chore: enable strictest TypeScript config"
 - Create: `eslint.config.js`, `.oxlintrc.json`, `.prettierrc`, `.prettierignore`
 - Modify: `package.json`
 
-- [ ] **Step 1: Install tooling deps**
+- [x] **Step 1: Install tooling deps**
 
 ```bash
 npm install -D @astrojs/check typescript eslint @eslint/js typescript-eslint eslint-plugin-astro astro-eslint-parser eslint-plugin-simple-import-sort globals oxlint prettier prettier-plugin-astro
 ```
 
-- [ ] **Step 2: Create eslint.config.js**
+- [x] **Step 2: Create eslint.config.js**
 
 ```js
 import js from '@eslint/js';
@@ -258,7 +258,7 @@ export default tseslint.config(
 );
 ```
 
-- [ ] **Step 3: Create .oxlintrc.json**
+- [x] **Step 3: Create .oxlintrc.json**
 
 ```json
 {
@@ -268,7 +268,7 @@ export default tseslint.config(
 }
 ```
 
-- [ ] **Step 4: Create .prettierrc and .prettierignore**
+- [x] **Step 4: Create .prettierrc and .prettierignore**
 
 `.prettierrc`:
 
@@ -292,7 +292,7 @@ dist
 node_modules
 ```
 
-- [ ] **Step 5: Add npm scripts**
+- [x] **Step 5: Add npm scripts**
 
 Edit `package.json` `scripts`:
 
@@ -312,12 +312,12 @@ Edit `package.json` `scripts`:
 }
 ```
 
-- [ ] **Step 6: Verify**
+- [x] **Step 6: Verify**
 
 Run: `npm run format && npm run lint && npm run check && npm run build`
 Expected: all four exit 0.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add eslint.config.js .oxlintrc.json .prettierrc .prettierignore package.json package-lock.json
@@ -333,7 +333,7 @@ git commit -m "chore: port lint/format tooling from legacy project"
 - Create: `src/layouts/BaseLayout.astro`, `src/pages/404.astro`, `public/_headers`, `public/robots.txt`, `.node-version`
 - Modify: `src/pages/index.astro`
 
-- [ ] **Step 1: Create src/layouts/BaseLayout.astro**
+- [x] **Step 1: Create src/layouts/BaseLayout.astro**
 
 ```astro
 ---
@@ -355,7 +355,7 @@ const { title } = Astro.props;
 </html>
 ```
 
-- [ ] **Step 2: Replace src/pages/index.astro**
+- [x] **Step 2: Replace src/pages/index.astro**
 
 ```astro
 ---
@@ -370,7 +370,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-- [ ] **Step 3: Create src/pages/404.astro**
+- [x] **Step 3: Create src/pages/404.astro**
 
 ```astro
 ---
@@ -385,7 +385,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-- [ ] **Step 4: Create public/\_headers**
+- [x] **Step 4: Create public/\_headers**
 
 ```
 /*
@@ -393,7 +393,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   X-Frame-Options: DENY
 ```
 
-- [ ] **Step 5: Create public/robots.txt**
+- [x] **Step 5: Create public/robots.txt**
 
 ```
 User-agent: *
@@ -402,13 +402,13 @@ Allow: /
 Sitemap: https://skatelawrence.com/sitemap-index.xml
 ```
 
-- [ ] **Step 6: Create .node-version**
+- [x] **Step 6: Create .node-version**
 
 ```
 22
 ```
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify**
 
 ```bash
 npm run build
@@ -422,7 +422,7 @@ Expected:
 - `dist/_headers` and `dist/robots.txt` exist with exact content above
 - Local preview: homepage shows placeholder text; a nonexistent path serves the 404 page
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src public/_headers public/robots.txt .node-version
