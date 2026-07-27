@@ -62,10 +62,10 @@ Pull these directly from the live site, don't recreate:
 
 Maps 1:1 to what's live now:
 
-1. **Header/Nav** — logo, anchor links (Home / About Us / Our Parks / Contact), mobile hamburger menu, Donate button in nav
-2. **Hero** — kicker text "Our mission is simple", AnimatedHeadline ("Make Lawrence" + highlighted "Skateable"), hero photo with caption/photo-credit overlay
-3. **About Us** — two text blocks: "What we do" / "Why we do it"
-4. **Our Parks** — 5-image grid, each with caption, photo credit, and external link (Google Maps or social)
+1. **Header/Nav** — logo, anchor links (Home / About Us / Our Parks / Contact), Donate button in nav. **Corrected during Phase 3 build:** there is no working mobile hamburger menu on the live site — the mobile/tablet header is logo + Donate button only, no toggle, no menu items. Confirmed via live DOM inspection and replicated exactly (a live behavior to match, not a bug to fix).
+2. **Hero** — kicker text "Our mission is simple", AnimatedHeadline ("Make Lawrence" + highlighted "Skateable"), hero photo with caption/photo-credit. **Corrected during Phase 4 build:** the caption is not an overlay — it's a normal static in-flow element directly below the photo (`position: static`), confirmed via live `getComputedStyle`.
+3. **About Us** — **corrected during Phase 5 build:** not two text blocks — the live section is five pieces in sequence: an "About us" headline, an embedded YouTube video, then "What we do" headline + body text, then "Why we do it" headline + body text.
+4. **Our Parks** — **corrected during Phase 6 build:** not a grid — a single-column vertical stack of 5 full-width images (even at desktop), each with caption, photo credit, and external link (Google Maps, YouTube, or Instagram). Confirmed via live `getComputedStyle` (`display: flex; flex-direction: column`).
 5. **Who We Are** — short team blurb
 6. **Support/Donate** — CTA text, PayPal donate link, MOKAN SKATES partner mention, tax-receipt email
 7. **Footer** — Instagram/Facebook links, copyright, org name
@@ -88,11 +88,13 @@ Maps 1:1 to what's live now:
 - Underline: SVG path draws via `stroke-dasharray`/`stroke-dashoffset`, 0→full over 1200ms, repeats every 5000ms while `loop: yes`
 - Path data (verbatim, reuse as-is): `M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7`
 
-**AnimatedUnderline (donate button hover)** — already built in current project. Re-diff against live site's actual easing curve before calling it final; screenshots (`stroke-not-quite.png`, `stroke-not-quite-2.png`) suggest earlier attempts didn't nail it.
+**Note (confirmed during Phase 5 build):** `highlight_iteration_delay: 5000` above is specific to the Hero instance only. Every other AnimatedHeadline instance on the live site (About us / What we do / Why we do it / Our parks / Who we are) uses `8000` instead. Draw duration (1200ms) and fade duration (400ms) are constant across every instance — only the cycle length differs, which changes the underline animation's keyframe percentages.
+
+**AnimatedUnderline (donate button hover)** — **corrected during Phase 3 build:** this doesn't correspond to any real live behavior. The donate button's hover is a plain background-color crossfade, not an SVG underline-draw animation — confirmed via live DOM/CSS inspection. Not built. The only real SVG-underline-draw logic on the live site belongs to AnimatedHeadline (above).
 
 **CursorDot** — already built, carries over.
 
-**Mobile menu toggle** — not yet captured. Needs a DevTools pass on the hamburger open/close transition before Claude Code can replicate it.
+**Mobile menu toggle** — **corrected during Phase 3 build:** there is no mobile menu toggle to capture. The live mobile/tablet header has no hamburger icon or menu at all (logo + Donate button only) — see the corrected Header/Nav entry in section 6.
 
 ## 8. Performance targets
 
@@ -139,7 +141,7 @@ Build-time hardening (part of initial scaffold, not an afterthought):
 
 ## 11. Open questions to resolve before handing this to Claude Code
 
-- [ ] Font family/weights — pull from live site `<head>`
-- [ ] Favicon/apple-touch-icon assets — pull from live site `<head>`
-- [ ] Mobile menu animation — needs a DevTools capture
+- [x] Font family/weights — resolved during Phase 2 build: Poppins, self-hosted, weights 300–700.
+- [x] Favicon/apple-touch-icon assets — resolved during Phase 2 build: pulled from live `<head>` and in place.
+- [x] Mobile menu animation — resolved during Phase 3 build: there is no mobile menu to animate. The live mobile/tablet header has no hamburger toggle at all (logo + Donate button only) — see the corrected Header/Nav entry in section 6.
 - [ ] Baseline PageSpeed number on current live site, for a real before/after comparison
