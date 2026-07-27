@@ -3,6 +3,7 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 
+import CursorDot from '../components/CursorDot.astro';
 import Header from '../components/Header.astro';
 
 interface Props {
@@ -25,5 +26,6 @@ const { title } = Astro.props;
   <body>
     <Header />
     <slot />
+    <CursorDot />
   </body>
 </html>
