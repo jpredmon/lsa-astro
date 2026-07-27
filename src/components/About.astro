@@ -1,0 +1,55 @@
+---
+import AboutVideo from './about/AboutVideo.astro';
+import AnimatedHeadline from './hero/AnimatedHeadline.astro';
+---
+
+<section id="about-us-id" class="about__headline-section">
+  <AnimatedHeadline as="h2" variant="section" highlightedText="About us" cycleDurationMs={8000} />
+</section>
+
+<section class="about__video-section">
+  <AboutVideo />
+</section>
+
+<section id="what-we-do-id" class="about__headline-section">
+  <AnimatedHeadline as="h2" variant="section" highlightedText="What we do" cycleDurationMs={8000} />
+</section>
+
+<section class="about__body-section">
+  <h5>Advocate, fundraise for, create and manage safe places to skate/ride in the greater Lawrence area.</h5>
+</section>
+
+<section id="why-we-do-it-id" class="about__headline-section">
+  <AnimatedHeadline as="h2" variant="section" highlightedText="Why we do it" cycleDurationMs={8000} />
+</section>
+
+<section class="about__body-section">
+  <h5>
+    Skateboarding improves mental health, fosters community, and encourages diversity and resilience. This applies
+    to all skatepark users and riders on the streets.
+  </h5>
+</section>
+
+<style>
+  .about__headline-section {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-sm);
+    text-align: center;
+  }
+
+  .about__video-section {
+    padding: 0 var(--space-sm) var(--space-md);
+  }
+
+  .about__body-section {
+    background-color: var(--color-cream-2);
+    padding: var(--space-about-body) var(--space-sm);
+    text-align: center;
+  }
+
+  .about__body-section h5 {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+  }
+</style>
