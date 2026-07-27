@@ -1,0 +1,66 @@
+---
+import { getImage } from 'astro:assets';
+
+import heroDesktopSrc from '../../assets/hero/hero-desktop.jpeg';
+import heroMobileSrc from '../../assets/hero/hero-mobile.jpeg';
+
+const CREDIT_URL = 'https://www.facebook.com/share/p/TiPvc396EhVzxPyx/?mibextid=WC7FNe';
+
+const heroDesktop = await getImage({
+  src: heroDesktopSrc,
+  width: 1024,
+  height: 768,
+  format: 'webp',
+});
+const heroMobile = await getImage({ src: heroMobileSrc, width: 480, height: 360, format: 'webp' });
+---
+
+<figure class="hero-photo">
+  <picture>
+    <source media="(max-width: 767px)" srcset={heroMobile.src} width="480" height="360" />
+    <img
+      src={heroDesktop.src}
+      width="1024"
+      height="768"
+      alt="Skaters at the 2024 Build-a-Board event"
+      loading="eager"
+      class="hero-photo__image"
+    />
+  </picture>
+  <figcaption class="hero-photo__caption">
+    <a href={CREDIT_URL} target="_blank" rel="noopener" class="hero-photo__credit-link">
+      <strong>Build-a-Board 2024</strong>
+    </a>
+    - Photo: Nicholas Ward
+  </figcaption>
+</figure>
+
+<style>
+  .hero-photo {
+    margin: 0;
+  }
+
+  .hero-photo__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Static in-flow caption, NOT an absolute overlay — corrects the
+     migration spec's original "caption overlay" wording; live-verified
+     position: static directly below the image. */
+  .hero-photo__caption {
+    margin: var(--space-xs) 0 0;
+    font-size: 12.8px; /* live-measured; no matching token in tokens.css */
+    color: var(--color-ink);
+    background-color: transparent;
+  }
+
+  .hero-photo__credit-link {
+    text-decoration: none;
+  }
+
+  .hero-photo__credit-link strong {
+    color: var(--color-highlight-yellow);
+  }
+</style>
