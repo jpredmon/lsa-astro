@@ -18,7 +18,7 @@ const {
 }: Props = Astro.props;
 ---
 
-<Tag class="headline">
+<Tag class="headline" style={`animation-duration: ${pulseDurationMs}ms`}>
   {plainText}{' '}
   <span class="headline__highlight-wrap">
     <span class="headline__highlight">{highlightedText}</span>
@@ -35,11 +35,18 @@ const {
   </span>
 </Tag>
 
-<style
-  define:vars={{ pulseDuration: `${pulseDurationMs}ms`, cycleDuration: `${cycleDurationMs}ms` }}
->
+<style define:vars={{ cycleDuration: `${cycleDurationMs}ms` }}>
+  /* animation-duration is set via an inline style prop on the Tag element
+     (not define:vars) — Astro's define:vars only injects CSS custom
+     properties onto elements it can statically identify as plain HTML tags,
+     and Tag here is a dynamic/capitalized reference (h2/h3/h4 chosen at
+     runtime), so define:vars silently skips it. A var() that fails to
+     resolve invalidates the WHOLE animation shorthand, not just the
+     duration, so this rule must stay free of var(--pulseDuration) entirely
+     — the shorthand below only sets name/timing/iteration-count, and the
+     inline style overrides just the duration longhand. */
   .headline {
-    animation: headline-pulse var(--pulseDuration) ease 1;
+    animation: headline-pulse 1s ease 1;
   }
 
   @keyframes headline-pulse {
