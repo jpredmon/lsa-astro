@@ -17,7 +17,14 @@ const mobile = await getImage({ src: mobileSrc, width: 480, height: 320, format:
 <figure class="park-photo">
   <picture>
     <source media="(max-width: 1024px)" srcset={mobile.src} width="480" height="320" />
-    <img src={desktop.src} width="1024" height="682" alt={alt} loading="lazy" class="park-photo__image" />
+    <img
+      src={desktop.src}
+      width="1024"
+      height="682"
+      alt={alt}
+      loading="lazy"
+      class="park-photo__image"
+    />
   </picture>
   <figcaption class="park-photo__caption">
     <slot />
