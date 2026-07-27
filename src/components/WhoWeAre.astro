@@ -1,0 +1,50 @@
+---
+import AnimatedHeadline from './hero/AnimatedHeadline.astro';
+---
+
+<section id="contact-id" class="who-we-are__headline-section">
+  <AnimatedHeadline as="h2" variant="section" highlightedText="Who we are" cycleDurationMs={8000} />
+</section>
+
+<section class="who-we-are__body-section">
+  <p>A revolving and evolving crew.</p>
+  <p>Assembled by JP Redmon.</p>
+  <p>
+    Contact us: <strong
+      ><a href="mailto:lawrenceskatersassociation@gmail.com">lawrenceskatersassociation@gmail.com</a
+      ></strong
+    >
+  </p>
+</section>
+
+<style>
+  .who-we-are__headline-section {
+    max-width: var(--container-max-width);
+    margin: var(--space-section-gap) auto 0;
+    padding: var(--space-headline-section) var(--space-sm);
+    text-align: center;
+  }
+
+  .who-we-are__body-section {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 30px var(--space-sm); /* live-measured: text-editor widget's own 20px all-around padding + its e-con-inner parent's 10px top/bottom padding, folded into one value — same fold-multi-layer-padding pattern as --space-about-video-gap. Single consumer, kept local rather than promoted to a token. Doesn't fit xs/sm/md/lg scale. */
+    text-align: center;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    color: var(--color-ink);
+  }
+
+  .who-we-are__body-section p {
+    margin: 0 0 16px; /* live-measured paragraph spacing. Single consumer, kept local rather than promoted to a token. Doesn't fit xs/sm/md/lg scale. */
+  }
+
+  .who-we-are__body-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .who-we-are__body-section a {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
