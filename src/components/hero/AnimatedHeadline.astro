@@ -5,6 +5,18 @@ interface Props {
   as?: 'h2' | 'h3' | 'h4';
   pulseDurationMs?: number;
   drawDurationMs?: number;
+  /* Only two values exist anywhere on the live site — confirmed by polling
+     every elementor-headline--style-highlight instance (Hero, About us,
+     What we do, Why we do it, Our parks, Who we are): Hero alone uses
+     5000ms, every other instance uses 8000ms. Draw (1200ms) and fade
+     (400ms) are constant in both cases — only the cycle length (hold
+     duration) differs, which is why this can't just be "reuse Hero's
+     keyframe percentages with a different animation-duration": the
+     percentages themselves are relative to cycle length and would draw
+     too fast / hold too long if reused as-is. Restricted to a union
+     (not a general number) so a typo'd value fails at compile time
+     instead of silently animating with no matching keyframes. */
+  cycleDurationMs?: 5000 | 8000;
 }
 
 const {
@@ -13,6 +25,7 @@ const {
   as: Tag = 'h3',
   pulseDurationMs = 1250,
   drawDurationMs = 1200,
+  cycleDurationMs = 5000,
 }: Props = Astro.props;
 ---
 
@@ -21,7 +34,7 @@ const {
   <span class="headline__highlight-wrap">
     <span class="headline__highlight">{highlightedText}</span>
     <svg
-      class="headline__underline"
+      class={`headline__underline headline__underline--cycle-${cycleDurationMs}`}
       viewBox="0 0 500 150"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -131,15 +144,22 @@ const {
     fill: none;
     stroke: var(--color-highlight-yellow);
     stroke-width: 20px;
-    animation: headline-underline-loop 5s ease infinite;
+    animation: headline-underline-loop-5000 5s ease infinite;
+  }
+
+  .headline__underline--cycle-8000 path {
+    animation-name: headline-underline-loop-8000;
+    animation-duration: 8s;
   }
 
   /* Combines the live site's two separately-JS-toggled keyframes
-     (elementor-headline-dash + hide-highlight) into one self-contained loop,
-     timed at Hero's live ratio: draw 0-1200ms (0-24%), hold 1200-4600ms
-     (24-92%), fade+blur out 4600-5000ms (92-100%), instant reset into the
-     next iteration at 0%. */
-  @keyframes headline-underline-loop {
+     (elementor-headline-dash + hide-highlight) into one self-contained loop.
+     Two variants because draw (1200ms) and fade (400ms) are constant in
+     absolute time but the site uses two different cycle lengths (see the
+     cycleDurationMs prop comment) — the percentages below are each
+     variant's draw/fade window expressed as a fraction of ITS OWN cycle,
+     live-polled per variant rather than assumed from the other's ratio. */
+  @keyframes headline-underline-loop-5000 {
     0% {
       stroke-dasharray: 0, 1500;
       opacity: 1;
@@ -151,6 +171,31 @@ const {
       filter: blur(0);
     }
     92% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 0;
+      filter: blur(10px);
+    }
+  }
+
+  /* draw 0-1200ms (0-15%), hold 1200-7600ms (15-95%), fade+blur 7600-8000ms
+     (95-100%) — live-polled on the "About us" instance (delayMs: 8000). */
+  @keyframes headline-underline-loop-8000 {
+    0% {
+      stroke-dasharray: 0, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    15% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    95% {
       stroke-dasharray: 1500, 1500;
       opacity: 1;
       filter: blur(0);
