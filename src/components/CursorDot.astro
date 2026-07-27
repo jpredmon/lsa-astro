@@ -33,7 +33,12 @@
 <script>
   import { computeDotPosition, getDotSize } from '../lib/cursor-dot';
 
-  const HOVER_SELECTOR = 'a, button';
+  // Excludes .donate-button specifically: growing the dot to 70px at low
+  // opacity directly over a filled/bordered button's own text reads as a
+  // stray graphic sitting on top of the label, not a hover effect — user
+  // feedback after seeing it deployed. Plain text links (nav, photo credit)
+  // keep the grow effect since there's no button chrome underneath to clash with.
+  const HOVER_SELECTOR = 'a:not(.donate-button), button:not(.donate-button)';
   const dot = document.getElementById('mouse-dot');
 
   if (dot) {
