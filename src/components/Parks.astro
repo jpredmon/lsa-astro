@@ -1,0 +1,59 @@
+---
+import centennialDesktop from '../assets/parks/centennial-desktop.jpg';
+import centennialMobile from '../assets/parks/centennial-mobile.jpg';
+import deerfieldDesktop from '../assets/parks/deerfield-desktop.jpg';
+import deerfieldMobile from '../assets/parks/deerfield-mobile.jpg';
+import edgewoodDesktop from '../assets/parks/edgewood-desktop.jpg';
+import edgewoodMobile from '../assets/parks/edgewood-mobile.jpg';
+import holcomDesktop from '../assets/parks/holcom-desktop.jpg';
+import holcomMobile from '../assets/parks/holcom-mobile.jpg';
+import vertRampDesktop from '../assets/parks/vert-ramp-desktop.jpg';
+import vertRampMobile from '../assets/parks/vert-ramp-mobile.jpg';
+import AnimatedHeadline from './hero/AnimatedHeadline.astro';
+import ParkPhoto from './parks/ParkPhoto.astro';
+---
+
+<section id="parks-id" class="parks__headline-section">
+  <AnimatedHeadline as="h2" variant="section" highlightedText="Our parks" cycleDurationMs={8000} />
+</section>
+
+<section class="parks__grid-section">
+  <ParkPhoto desktopSrc={centennialDesktop} mobileSrc={centennialMobile} alt="Centennial Skatepark">
+    <a href="https://maps.app.goo.gl/ctuEp39odHU9sykk6" target="_blank" rel="noopener"><strong>Centennial</strong></a>
+     - Photos: Ben Hlavacek
+  </ParkPhoto>
+  <ParkPhoto desktopSrc={vertRampDesktop} mobileSrc={vertRampMobile} alt="">
+    The <a href="https://youtu.be/BZ1ujouk_Qo?si=X9xo_pr5YRGtV7Qw" target="_blank" rel="noopener"><strong
+      >Corey Lawrence</strong
+    ></a> Memorial Vert Ramp at Centennial
+  </ParkPhoto>
+  <ParkPhoto desktopSrc={edgewoodDesktop} mobileSrc={edgewoodMobile} alt="Edgewood DIY">
+    <a href="https://www.instagram.com/edgewood_diy?igsh=eDg0NG8yb3NkYWMw" target="_blank" rel="noopener"
+      ><strong>Edgewood DIY</strong></a
+    >
+  </ParkPhoto>
+  <ParkPhoto desktopSrc={holcomDesktop} mobileSrc={holcomMobile} alt="Holcom">
+    <a href="https://maps.app.goo.gl/uPQTdRn9Y1EyXY638" target="_blank" rel="noopener"><strong>Holcom</strong></a>
+  </ParkPhoto>
+  <ParkPhoto desktopSrc={deerfieldDesktop} mobileSrc={deerfieldMobile} alt="Deerfield">
+    <a href="https://maps.app.goo.gl/zSDTqEJwpjzfGV7MA" target="_blank" rel="noopener"><strong>Deerfield</strong></a>
+  </ParkPhoto>
+</section>
+
+<style>
+  .parks__headline-section {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-headline-section) var(--space-sm) var(--space-parks-headline-gap-extra);
+    text-align: center;
+  }
+
+  .parks__grid-section {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-parks-grid-gap-top) var(--space-sm) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+</style>
