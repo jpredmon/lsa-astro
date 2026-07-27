@@ -40,13 +40,38 @@ const {
      (not define:vars) — Astro's define:vars only injects CSS custom
      properties onto elements it can statically identify as plain HTML tags,
      and Tag here is a dynamic/capitalized reference (h2/h3/h4 chosen at
-     runtime), so define:vars silently skips it. A var() that fails to
-     resolve invalidates the WHOLE animation shorthand, not just the
+     runtime), so define:vars silently skips it — confirmed live, it doesn't
+     land on Tag at all, only on its static descendants. A var() that fails
+     to resolve invalidates the WHOLE animation shorthand, not just the
      duration, so this rule must stay free of var(--pulseDuration) entirely
      — the shorthand below only sets name/timing/iteration-count, and the
-     inline style overrides just the duration longhand. */
+     inline style overrides just the duration longhand.
+
+     Font size is hardcoded here for the same reason (Tag can't receive
+     define:vars custom properties at all, at any breakpoint) — these are
+     Hero's own live-measured values (120px/64px/45px, NOT the generic h3
+     token scale; this widget has its own dedicated typography on the live
+     site, unrelated to h1-h6). Only Hero uses this component right now; if
+     a later phase needs a different size, that's when a size-variant class
+     gets added — no point generalizing for a need that doesn't exist yet. */
   .headline {
+    font-size: 120px;
+    line-height: 0.9em;
+    font-weight: var(--font-weight-bold);
+    text-align: left;
     animation: headline-pulse 1s ease 1;
+  }
+
+  @media (max-width: 1024px) {
+    .headline {
+      font-size: 64px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .headline {
+      font-size: 45px;
+    }
   }
 
   @keyframes headline-pulse {
@@ -73,10 +98,19 @@ const {
 
   /* overflow: visible — the path's y-values (up to ~146) plus half the 20px
      stroke-width exceed the 150-tall viewBox; without this the stroke's
-     bottom edge clips. */
+     bottom edge clips.
+
+     width/height: 100% (not just inset: 0) — SVG is a replaced element with
+     an intrinsic aspect ratio from its viewBox (500:150); confirmed live
+     that inset: 0 alone does NOT override that ratio on an absolutely
+     positioned SVG, so it rendered taller than its container instead of
+     filling it exactly. Explicit 100%/100% forces a true fill regardless of
+     the viewBox ratio, letting preserveAspectRatio="none" do the stretching. */
   .headline__underline {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     overflow: visible;
     pointer-events: none;
