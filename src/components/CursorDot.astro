@@ -33,12 +33,10 @@
 <script>
   import { computeDotPosition, getDotSize } from '../lib/cursor-dot';
 
-  // Excludes .donate-button specifically: growing the dot to 70px at low
-  // opacity directly over a filled/bordered button's own text reads as a
-  // stray graphic sitting on top of the label, not a hover effect — user
-  // feedback after seeing it deployed. Plain text links (nav, photo credit)
-  // keep the grow effect since there's no button chrome underneath to clash with.
-  const HOVER_SELECTOR = 'a:not(.donate-button), button:not(.donate-button)';
+  // Grows/fades over every link and button, donate-button included —
+  // confirmed live on skatelawrence.com: hovering its Donate button adds
+  // the same "over-link" 70px/opacity:0.2 state as the nav links.
+  const HOVER_SELECTOR = 'a, button';
   const dot = document.getElementById('mouse-dot');
 
   if (dot) {
