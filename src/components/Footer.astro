@@ -110,9 +110,9 @@ const year = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 51px; /* live-measured, though inconsistently (one query read 61.6px) — confirm exact value during Task 4 QA */
-    height: 51px;
-    border: 1px solid var(--color-ink); /* live-measured, though inconsistently (one query read 0.8px, another 0px) — confirm exact value during Task 4 QA */
+    width: 61.6px; /* live-confirmed (Task 4 QA): consistently 61.6px across repeated live getComputedStyle queries */
+    height: 61.6px;
+    border: 1px solid var(--color-ink); /* live-confirmed as 1px (Task 4 QA): live computed style reads 0.8px, but an identical A/B test against this project's own known-1px border reproduced the same 0.8px readout — a devicePixelRatio:1.25 rounding artifact on hairline borders, not a real design value */
     border-radius: 50%;
     color: var(--color-ink);
   }
