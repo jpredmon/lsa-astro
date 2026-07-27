@@ -1,0 +1,71 @@
+<div id="mouse-dot" class="mouse-dot" aria-hidden="true"></div>
+
+<style>
+  .mouse-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-highlight-yellow);
+    opacity: 1;
+    pointer-events: none;
+    transition:
+      top 0.3s linear,
+      left 0.3s linear,
+      width 0.3s linear,
+      height 0.3s linear,
+      opacity 0.3s;
+  }
+
+  /* Not independently re-verified against the live site this session —
+     carried over from the pre-rebuild legacy component as a reasonable,
+     low-risk default for hiding the follower on touch devices. */
+  @media (hover: none) {
+    .mouse-dot {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { computeDotPosition, getDotSize } from '../lib/cursor-dot';
+
+  const HOVER_SELECTOR = 'a, button';
+  const dot = document.getElementById('mouse-dot');
+
+  if (dot) {
+    const dotEl = dot;
+    let width = 10;
+    let height = 10;
+
+    function applySize(isHovering: boolean) {
+      const size = getDotSize(isHovering);
+      width = size.width;
+      height = size.height;
+      dotEl.style.width = `${size.width}px`;
+      dotEl.style.height = `${size.height}px`;
+      dotEl.style.opacity = String(size.opacity);
+    }
+
+    document.addEventListener('mousemove', (event) => {
+      const { top, left } = computeDotPosition(event.clientX, event.clientY, width, height);
+      dotEl.style.top = `${top}px`;
+      dotEl.style.left = `${left}px`;
+    });
+
+    document.addEventListener('mouseover', (event) => {
+      if (event.target instanceof Element && event.target.closest(HOVER_SELECTOR)) {
+        applySize(true);
+      }
+    });
+
+    document.addEventListener('mouseout', (event) => {
+      if (event.target instanceof Element && event.target.closest(HOVER_SELECTOR)) {
+        applySize(false);
+      }
+    });
+  }
+</script>
