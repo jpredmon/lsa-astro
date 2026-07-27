@@ -1,0 +1,112 @@
+---
+interface Props {
+  plainText: string;
+  highlightedText: string;
+  as?: 'h2' | 'h3' | 'h4';
+  pulseDurationMs?: number;
+  drawDurationMs?: number;
+  cycleDurationMs?: number;
+}
+
+const {
+  plainText,
+  highlightedText,
+  as: Tag = 'h3',
+  pulseDurationMs = 1250,
+  drawDurationMs = 1200,
+  cycleDurationMs = 5000,
+}: Props = Astro.props;
+---
+
+<Tag class="headline">
+  {plainText}{' '}
+  <span class="headline__highlight-wrap">
+    <span class="headline__highlight">{highlightedText}</span>
+    <svg
+      class="headline__underline"
+      viewBox="0 0 500 150"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+      data-draw-duration-ms={drawDurationMs}
+    >
+      <path d="M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7"></path>
+    </svg>
+  </span>
+</Tag>
+
+<style
+  define:vars={{ pulseDuration: `${pulseDurationMs}ms`, cycleDuration: `${cycleDurationMs}ms` }}
+>
+  .headline {
+    animation: headline-pulse var(--pulseDuration) ease 1;
+  }
+
+  @keyframes headline-pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  .headline__highlight-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .headline__highlight {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* overflow: visible — the path's y-values (up to ~146) plus half the 20px
+     stroke-width exceed the 150-tall viewBox; without this the stroke's
+     bottom edge clips. */
+  .headline__underline {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .headline__underline path {
+    fill: none;
+    stroke: var(--color-highlight-yellow);
+    stroke-width: 20px;
+    animation: headline-underline-loop var(--cycleDuration) ease infinite;
+  }
+
+  /* Combines the live site's two separately-JS-toggled keyframes
+     (elementor-headline-dash + hide-highlight) into one self-contained loop,
+     timed at Hero's live ratio: draw 0-1200ms (0-24%), hold 1200-4600ms
+     (24-92%), fade+blur out 4600-5000ms (92-100%), instant reset into the
+     next iteration at 0%. */
+  @keyframes headline-underline-loop {
+    0% {
+      stroke-dasharray: 0, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    24% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    92% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      stroke-dasharray: 1500, 1500;
+      opacity: 0;
+      filter: blur(10px);
+    }
+  }
+</style>
