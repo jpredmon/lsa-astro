@@ -3,7 +3,6 @@ interface Props {
   plainText?: string;
   highlightedText: string;
   as?: 'h2' | 'h3' | 'h4';
-  pulseDurationMs?: number;
   drawDurationMs?: number;
   /* Only two values exist anywhere on the live site — confirmed by polling
      every elementor-headline--style-highlight instance (Hero, About us,
@@ -24,14 +23,13 @@ const {
   plainText = '',
   highlightedText,
   as: Tag = 'h3',
-  pulseDurationMs = 1250,
   drawDurationMs = 1200,
   cycleDurationMs = 5000,
   variant = 'hero',
 }: Props = Astro.props;
 ---
 
-<Tag class={`headline headline--${variant}`} style={`animation-duration: ${pulseDurationMs}ms`}>
+<Tag class={`headline headline--${variant}`}>
   {plainText && `${plainText} `}
   <span class="headline__highlight-wrap">
     <span class="headline__highlight">{highlightedText}</span>
@@ -56,16 +54,16 @@ const {
      (var(--cycleDuration) never resolved, invalidating the whole animation
      shorthand). All timing/size values are hardcoded literals instead.
 
-     animation-duration for the pulse is set via a literal inline style prop
-     on the Tag element (a plain string, not define:vars) — Astro's
-     define:vars only injects onto elements it can statically identify as
-     plain HTML tags, and Tag here is a dynamic/capitalized reference
-     (h2/h3/h4 chosen at runtime), so define:vars silently skips it anyway,
-     on top of the CSP issue above. A var() that fails to resolve invalidates
-     the WHOLE animation shorthand, not just the duration, so this rule must
-     stay free of any var() — the shorthand below only sets
-     name/timing/iteration-count, and the inline style overrides just the
-     duration longhand.
+     The pulse's animation-duration used to be set via a pulseDurationMs
+     prop rendered into an inline style="" attribute on Tag — the same CSP
+     that blocks inline <style> tags also silently drops inline style=""
+     attributes, so that value never actually applied in production; the
+     pulse always ran at whatever duration this rule's shorthand hardcoded
+     (previously 1s), regardless of what was passed in. Since no call site
+     (Hero, About, What, Why) ever overrode the 1250ms default anyway, the
+     prop was removed and 1250ms hardcoded directly into the shorthand
+     below instead of reintroducing another var()-based or inline-style
+     workaround.
 
      Font size is hardcoded here for the same reason (Tag can't receive
      define:vars custom properties at all, at any breakpoint). Two variants
@@ -79,7 +77,7 @@ const {
      nothing size-specific to hardcode for this variant. */
   .headline {
     font-weight: var(--font-weight-bold);
-    animation: headline-pulse 1s ease 1;
+    animation: headline-pulse 1250ms ease 1;
   }
 
   .headline--hero {
