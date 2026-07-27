@@ -1,6 +1,6 @@
 ---
 interface Props {
-  variant: 'desktop' | 'mobile';
+  variant: 'desktop' | 'mobile' | 'cta';
 }
 
 const { variant } = Astro.props;
@@ -41,5 +41,19 @@ const DONATE_URL = 'https://www.paypal.com/donate/?hosted_button_id=A9V2ZVQJDLTS
     border: 1px solid var(--color-ink);
     color: var(--color-ink);
     font-size: var(--font-size-h6);
+  }
+
+  .donate-button--cta {
+    padding: 18px 55px;
+    background-color: var(--color-highlight-yellow);
+    border: none;
+    color: var(--color-ink);
+    transition: all 0.3s ease;
+  }
+
+  .donate-button--cta:hover,
+  .donate-button--cta:focus-visible {
+    background-color: var(--color-ink);
+    color: var(--color-white);
   }
 </style>
