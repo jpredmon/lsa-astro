@@ -36,8 +36,10 @@
                         --vamtam-vertical-padding-large /
                         --vamtam-box-outer-padding (identical, collapsed) */
   --space-content-fluid: min(6vh, 35px); /* WP --vamtam-content-space-l (desktop) */
-  --space-about-body: 40px; /* About Us body-text section padding-top/bottom, confirmed via getComputedStyle; doesn't fit xs/sm/md/lg scale */
+  --space-about-headline: 10px; /* About Us headline section (About us / What we do / Why we do it) padding-top/bottom, confirmed via getComputedStyle summing the live section's own padding (0) with its widget-wrap padding (10px) — doesn't fit xs/sm/md/lg scale */
+  --space-about-body: 50px; /* About Us body-text section padding-top/bottom, confirmed via getComputedStyle summing the live section's own padding (40px) with its widget-wrap padding (10px); doesn't fit xs/sm/md/lg scale. Live has a second body instance measuring 45px (40+5) instead — a live authoring inconsistency between the two widget instances; 50px matches the majority/first instance and this component uses one shared value for both */
   --space-about-section-gap: 110px; /* About Us top-level section margin-top (headline and body blocks alike; video sits flush against its preceding headline with 0 gap), confirmed via getComputedStyle on the live site's sibling sections; doesn't fit xs/sm/md/lg scale */
+  --space-about-video-gap: 70px; /* Empty spacer element between the "About us" headline section and the video on the live site (confirmed via getBoundingClientRect: a zero-padding, zero-margin 70px-tall div sits between them) — folded into .about__video-section's padding-top since there's no separate spacer element in this markup; doesn't fit xs/sm/md/lg scale */
 
   /* Layout */
   --container-max-width: 1260px;

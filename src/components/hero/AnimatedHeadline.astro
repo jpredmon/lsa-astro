@@ -68,12 +68,15 @@ const {
      duration longhand.
 
      Font size is hardcoded here for the same reason (Tag can't receive
-     define:vars custom properties at all, at any breakpoint) — these are
-     Hero's own live-measured values (120px/64px/45px, NOT the generic h3
-     token scale; this widget has its own dedicated typography on the live
-     site, unrelated to h1-h6). Only Hero uses this component right now; if
-     a later phase needs a different size, that's when a size-variant class
-     gets added — no point generalizing for a need that doesn't exist yet. */
+     define:vars custom properties at all, at any breakpoint). Two variants
+     exist: `hero` hardcodes Hero's own live-measured values (120px/64px/
+     45px, NOT the generic h3 token scale — this widget has its own
+     dedicated typography on the live site, unrelated to h1-h6). `section`
+     (About Us: About us / What we do / Why we do it, all rendered with
+     as="h2") sets no font-size of its own and instead inherits the
+     project's generic h2 CSS tokens from base.css — live-measured values
+     for those headings matched the generic h2 scale exactly, so there was
+     nothing size-specific to hardcode for this variant. */
   .headline {
     font-weight: var(--font-weight-bold);
     animation: headline-pulse 1s ease 1;
