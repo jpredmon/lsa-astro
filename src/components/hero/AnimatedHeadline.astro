@@ -101,6 +101,10 @@ const {
     z-index: 1;
   }
 
+  /* Underline paints ON TOP of the letters (not behind) — confirmed on the
+     live site, where the stroke overlaps the bottom of the glyphs rather
+     than sitting fully clear beneath them. */
+
   /* overflow: visible — the path's y-values (up to ~146) plus half the 20px
      stroke-width exceed the 150-tall viewBox; without this the stroke's
      bottom edge clips.
@@ -116,7 +120,7 @@ const {
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 2;
     overflow: visible;
     pointer-events: none;
   }
