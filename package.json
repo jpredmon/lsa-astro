@@ -15,7 +15,8 @@
     "lint:eslint": "eslint .",
     "lint": "npm run lint:oxlint && npm run lint:eslint",
     "format": "prettier --write .",
-    "generate:favicons": "node scripts/generate-favicons.mjs"
+    "generate:favicons": "node scripts/generate-favicons.mjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -35,6 +36,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.35.3",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
   }
 }
