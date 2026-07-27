@@ -36,6 +36,7 @@
                         --vamtam-vertical-padding-large /
                         --vamtam-box-outer-padding (identical, collapsed) */
   --space-content-fluid: min(6vh, 35px); /* WP --vamtam-content-space-l (desktop) */
+  --space-about-body: 40px; /* About Us body-text section padding-top/bottom, confirmed via getComputedStyle; doesn't fit xs/sm/md/lg scale */
 
   /* Layout */
   --container-max-width: 1260px;
