@@ -1,0 +1,37 @@
+---
+import AnimatedHeadline from './hero/AnimatedHeadline.astro';
+import HeroPhoto from './hero/HeroPhoto.astro';
+---
+
+<section class="hero" aria-label="Hero">
+  <div class="hero__intro">
+    <h4 class="hero__kicker">Our mission is simple</h4>
+    <AnimatedHeadline plainText="Make Lawrence" highlightedText="Skateable" />
+  </div>
+  <div class="hero__photo-wrap">
+    <HeroPhoto />
+  </div>
+</section>
+
+<style>
+  .hero {
+    background-color: var(--color-cream-2);
+  }
+
+  .hero__intro {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-sm) var(--space-md);
+    text-align: start;
+  }
+
+  .hero__kicker {
+    margin: 0 0 var(--space-xs);
+  }
+
+  .hero__photo-wrap {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-sm) var(--space-lg);
+  }
+</style>
