@@ -66,7 +66,7 @@ Maps 1:1 to what's live now:
 2. **Hero** — kicker text "Our mission is simple", AnimatedHeadline ("Make Lawrence" + highlighted "Skateable"), hero photo with caption/photo-credit. **Corrected during Phase 4 build:** the caption is not an overlay — it's a normal static in-flow element directly below the photo (`position: static`), confirmed via live `getComputedStyle`.
 3. **About Us** — **corrected during Phase 5 build:** not two text blocks — the live section is five pieces in sequence: an "About us" headline, an embedded YouTube video, then "What we do" headline + body text, then "Why we do it" headline + body text.
 4. **Our Parks** — **corrected during Phase 6 build:** not a grid — a single-column vertical stack of 5 full-width images (even at desktop), each with caption, photo credit, and external link (Google Maps, YouTube, or Instagram). Confirmed via live `getComputedStyle` (`display: flex; flex-direction: column`).
-5. **Who We Are** — short team blurb
+5. **Who We Are** — short team blurb. **Confirmed during Phase 7 build:** the live site's "Contact" nav item doesn't lead to a separate contact section — it's the anchor for the "Who We Are" headline/blurb section itself (a live mislabeling, replicated exactly, not fixed).
 6. **Support/Donate** — CTA text, PayPal donate link, MOKAN SKATES partner mention, tax-receipt email
 7. **Footer** — Instagram/Facebook links, copyright, org name
 
