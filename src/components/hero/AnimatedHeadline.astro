@@ -1,6 +1,6 @@
 ---
 interface Props {
-  plainText: string;
+  plainText?: string;
   highlightedText: string;
   as?: 'h2' | 'h3' | 'h4';
   pulseDurationMs?: number;
@@ -17,20 +17,22 @@ interface Props {
      (not a general number) so a typo'd value fails at compile time
      instead of silently animating with no matching keyframes. */
   cycleDurationMs?: 5000 | 8000;
+  variant?: 'hero' | 'section';
 }
 
 const {
-  plainText,
+  plainText = '',
   highlightedText,
   as: Tag = 'h3',
   pulseDurationMs = 1250,
   drawDurationMs = 1200,
   cycleDurationMs = 5000,
+  variant = 'hero',
 }: Props = Astro.props;
 ---
 
-<Tag class="headline" style={`animation-duration: ${pulseDurationMs}ms`}>
-  {plainText}{' '}
+<Tag class={`headline headline--${variant}`} style={`animation-duration: ${pulseDurationMs}ms`}>
+  {plainText && `${plainText} `}
   <span class="headline__highlight-wrap">
     <span class="headline__highlight">{highlightedText}</span>
     <svg
@@ -73,21 +75,28 @@ const {
      a later phase needs a different size, that's when a size-variant class
      gets added — no point generalizing for a need that doesn't exist yet. */
   .headline {
-    font-size: 120px;
-    line-height: 0.9em;
     font-weight: var(--font-weight-bold);
-    text-align: left;
     animation: headline-pulse 1s ease 1;
   }
 
+  .headline--hero {
+    font-size: 120px;
+    line-height: 0.9em;
+    text-align: left;
+  }
+
+  .headline--section {
+    text-align: center;
+  }
+
   @media (max-width: 1024px) {
-    .headline {
+    .headline--hero {
       font-size: 64px;
     }
   }
 
   @media (max-width: 767px) {
-    .headline {
+    .headline--hero {
       font-size: 45px;
     }
   }
