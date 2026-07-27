@@ -4,7 +4,7 @@ import Logo from './header/Logo.astro';
 import Nav from './header/Nav.astro';
 ---
 
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="site-header__bar site-header__bar--desktop">
     <div class="site-header__logo">
       <Logo variant="desktop" />
@@ -32,6 +32,15 @@ import Nav from './header/Nav.astro';
     z-index: 100;
     width: 100%;
     background-color: var(--color-cream-2);
+    transform: translateY(0);
+    transition: transform 0.15s linear;
+  }
+
+  /* Confirmed live: header hides on scroll-down (past its own height) and
+     reappears on scroll-up — translateY(-100%) matches the live site's
+     behavior of sliding up by exactly its own rendered height. */
+  .site-header--hidden {
+    transform: translateY(-100%);
   }
 
   .site-header__bar--desktop {
@@ -75,3 +84,24 @@ import Nav from './header/Nav.astro';
     }
   }
 </style>
+
+<script>
+  import { getStickyHeaderState } from '../lib/sticky-header';
+
+  const header = document.getElementById('site-header');
+
+  if (header) {
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        const currentScrollY = window.scrollY;
+        const state = getStickyHeaderState(currentScrollY, lastScrollY, header.offsetHeight);
+        header.classList.toggle('site-header--hidden', state === 'hidden');
+        lastScrollY = currentScrollY;
+      },
+      { passive: true }
+    );
+  }
+</script>
