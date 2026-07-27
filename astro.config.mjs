@@ -18,4 +18,15 @@ export default defineConfig({
     // stylesheet instead of weakening the CSP with 'unsafe-inline'.
     inlineStylesheets: 'never',
   },
+  vite: {
+    build: {
+      // Same CSP issue as inlineStylesheets above, but for scripts: Vite
+      // inlines very small JS chunks (like CursorDot's tiny handler) directly
+      // as an inline <script> tag, which our CSP (no 'unsafe-inline' in
+      // script-src) silently drops — found live, the cursor-follower never
+      // ran at all in production. 0 disables the size threshold so all
+      // scripts stay external, CSP-'self'-allowed files.
+      assetsInlineLimit: 0,
+    },
+  },
 });

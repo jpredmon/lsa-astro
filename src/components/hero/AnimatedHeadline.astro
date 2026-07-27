@@ -5,7 +5,6 @@ interface Props {
   as?: 'h2' | 'h3' | 'h4';
   pulseDurationMs?: number;
   drawDurationMs?: number;
-  cycleDurationMs?: number;
 }
 
 const {
@@ -14,7 +13,6 @@ const {
   as: Tag = 'h3',
   pulseDurationMs = 1250,
   drawDurationMs = 1200,
-  cycleDurationMs = 5000,
 }: Props = Astro.props;
 ---
 
@@ -35,17 +33,24 @@ const {
   </span>
 </Tag>
 
-<style define:vars={{ cycleDuration: `${cycleDurationMs}ms` }}>
-  /* animation-duration is set via an inline style prop on the Tag element
-     (not define:vars) — Astro's define:vars only injects CSS custom
-     properties onto elements it can statically identify as plain HTML tags,
-     and Tag here is a dynamic/capitalized reference (h2/h3/h4 chosen at
-     runtime), so define:vars silently skips it — confirmed live, it doesn't
-     land on Tag at all, only on its static descendants. A var() that fails
-     to resolve invalidates the WHOLE animation shorthand, not just the
-     duration, so this rule must stay free of var(--pulseDuration) entirely
-     — the shorthand below only sets name/timing/iteration-count, and the
-     inline style overrides just the duration longhand.
+<style>
+  /* No define:vars anywhere in this file: it injects custom properties via
+     an inline style="" HTML attribute, and our CSP (no 'unsafe-inline' in
+     style-src) blocks inline style attributes just like it blocks inline
+     <style> tags — confirmed live: this silently broke the underline loop
+     (var(--cycleDuration) never resolved, invalidating the whole animation
+     shorthand). All timing/size values are hardcoded literals instead.
+
+     animation-duration for the pulse is set via a literal inline style prop
+     on the Tag element (a plain string, not define:vars) — Astro's
+     define:vars only injects onto elements it can statically identify as
+     plain HTML tags, and Tag here is a dynamic/capitalized reference
+     (h2/h3/h4 chosen at runtime), so define:vars silently skips it anyway,
+     on top of the CSP issue above. A var() that fails to resolve invalidates
+     the WHOLE animation shorthand, not just the duration, so this rule must
+     stay free of any var() — the shorthand below only sets
+     name/timing/iteration-count, and the inline style overrides just the
+     duration longhand.
 
      Font size is hardcoded here for the same reason (Tag can't receive
      define:vars custom properties at all, at any breakpoint) — these are
@@ -120,7 +125,7 @@ const {
     fill: none;
     stroke: var(--color-highlight-yellow);
     stroke-width: 20px;
-    animation: headline-underline-loop var(--cycleDuration) ease infinite;
+    animation: headline-underline-loop 5s ease infinite;
   }
 
   /* Combines the live site's two separately-JS-toggled keyframes
