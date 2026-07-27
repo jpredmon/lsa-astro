@@ -68,7 +68,7 @@ Maps 1:1 to what's live now:
 4. **Our Parks** — **corrected during Phase 6 build:** not a grid — a single-column vertical stack of 5 full-width images (even at desktop), each with caption, photo credit, and external link (Google Maps, YouTube, or Instagram). Confirmed via live `getComputedStyle` (`display: flex; flex-direction: column`).
 5. **Who We Are** — short team blurb. **Confirmed during Phase 7 build:** the live site's "Contact" nav item doesn't lead to a separate contact section — it's the anchor for the "Who We Are" headline/blurb section itself (a live mislabeling, replicated exactly, not fixed).
 6. **Support/Donate** — CTA text, PayPal donate link, MOKAN SKATES partner mention, tax-receipt email
-7. **Footer** — Instagram/Facebook links, copyright, org name
+7. **Footer** — Instagram/Facebook links, copyright, org name. **Corrected during Phase 8 build:** Support/Donate and Footer are one single live `<footer>` element with no gap between them — built as one combined component (`Footer.astro`) instead of two, matching the live structure.
 
 ## 7. Animation specs (captured from live DOM)
 
