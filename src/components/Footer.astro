@@ -9,15 +9,15 @@ const year = new Date().getFullYear();
     <div class="site-footer__support-content">
       <h2>Support our work</h2>
       <p>
-        All proceeds support improvements for Lawrence skate amenities and make possible our
-        annual Build-a-Board program.
+        All proceeds support improvements for Lawrence skate amenities and make possible our annual
+        Build-a-Board program.
       </p>
       <p>
         We’ve partnered with our non-profit friends at <strong
-          ><a href="https://www.mokanskates.com/" target="_blank" rel="noopener"
-            >MOKAN SKATES</a
+          ><a href="https://www.mokanskates.com/" target="_blank" rel="noopener">MOKAN SKATES</a
           ></strong
-        > (<strong><a href="http://www.harrisonstreetdiy.com">Harrison Street DIY</a></strong> originators) to create this tax deductible donation link!
+        > (<strong><a href="http://www.harrisonstreetdiy.com">Harrison Street DIY</a></strong> originators)
+        to create this tax deductible donation link!
       </p>
       <div class="site-footer__donate-wrapper">
         <DonateButton variant="cta" />
@@ -65,6 +65,10 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  .site-footer {
+    background-color: var(--color-cream-2);
+  }
+
   .site-footer__support-section {
     max-width: var(--container-max-width);
     margin: 0 auto;
@@ -103,7 +107,7 @@ const year = new Date().getFullYear();
     justify-content: center;
     align-items: center;
     gap: var(--space-xs);
-    padding: 0 var(--space-sm) 40px;
+    padding: 40px var(--space-sm) 40px;
   }
 
   .site-footer__social-icon {
@@ -117,10 +121,20 @@ const year = new Date().getFullYear();
     color: var(--color-ink);
   }
 
+  .site-footer__social-icon:hover {
+    background-color: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-white);
+  }
+
   .site-footer__copyright-section {
-    padding: 0 var(--space-sm) 40px;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--color-nav-active);
+    padding: 40px var(--space-sm) 40px;
     text-align: center;
     font-size: 12px; /* live-measured; doesn't match --font-size-body (16px) or any h-token, single consumer, kept local */
+    line-height: 3.8em;
     color: var(--color-ink);
   }
 
