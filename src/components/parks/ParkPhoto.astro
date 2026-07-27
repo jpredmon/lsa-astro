@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  desktopSrc: ImageMetadata;
+  mobileSrc: ImageMetadata;
+  alt: string;
+}
+
+const { desktopSrc, mobileSrc, alt } = Astro.props;
+
+const desktop = await getImage({ src: desktopSrc, width: 1024, height: 682, format: 'webp' });
+const mobile = await getImage({ src: mobileSrc, width: 480, height: 320, format: 'webp' });
+---
+
+<figure class="park-photo">
+  <picture>
+    <source media="(max-width: 1024px)" srcset={mobile.src} width="480" height="320" />
+    <img src={desktop.src} width="1024" height="682" alt={alt} loading="lazy" class="park-photo__image" />
+  </picture>
+  <figcaption class="park-photo__caption">
+    <slot />
+  </figcaption>
+</figure>
+
+<style>
+  .park-photo {
+    margin: 0;
+  }
+
+  .park-photo__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .park-photo__caption {
+    margin: var(--space-xs) 0 0;
+    font-size: 12.8px; /* live-measured, same non-tokenized literal as HeroPhoto's caption */
+    color: var(--color-ink);
+    text-align: center;
+  }
+
+  .park-photo__caption :global(a) {
+    text-decoration: none;
+  }
+
+  .park-photo__caption :global(strong) {
+    color: var(--color-highlight-yellow);
+  }
+</style>
