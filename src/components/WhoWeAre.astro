@@ -47,4 +47,21 @@ import AnimatedHeadline from './hero/AnimatedHeadline.astro';
     color: inherit;
     text-decoration: none;
   }
+
+  @media (max-width: 767px) {
+    .who-we-are__body-section {
+      /* live-measured via getComputedStyle on the live site's CSSOM at the ≤767px breakpoint:
+         the text-editor widget's own padding drops from 20px all-around to 10px 0 0 0 (asymmetric),
+         while its e-con-inner parent's 10px top/bottom padding is unchanged — folded total becomes
+         20px top (10+10) / 10px bottom (10+0), replacing the desktop/tablet 30px/30px above */
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    .who-we-are__body-section p {
+      /* live's paragraph spacing is `margin: 0 0 1em`, not a fixed px value — at this breakpoint
+         --font-size-body drops to 15px, so 1em resolves to 15px instead of the 16px used above */
+      margin-bottom: 15px;
+    }
+  }
 </style>
