@@ -33,7 +33,7 @@ import AnimatedHeadline from './hero/AnimatedHeadline.astro';
 <style>
   .about__headline-section {
     max-width: var(--container-max-width);
-    margin: 0 auto;
+    margin: var(--space-about-section-gap) auto 0;
     padding: var(--space-md) var(--space-sm);
     text-align: center;
   }
@@ -44,6 +44,7 @@ import AnimatedHeadline from './hero/AnimatedHeadline.astro';
 
   .about__body-section {
     background-color: var(--color-cream-2);
+    margin-top: var(--space-about-section-gap);
     padding: var(--space-about-body) var(--space-sm);
     text-align: center;
   }

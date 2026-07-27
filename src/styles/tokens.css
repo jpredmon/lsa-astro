@@ -37,6 +37,7 @@
                         --vamtam-box-outer-padding (identical, collapsed) */
   --space-content-fluid: min(6vh, 35px); /* WP --vamtam-content-space-l (desktop) */
   --space-about-body: 40px; /* About Us body-text section padding-top/bottom, confirmed via getComputedStyle; doesn't fit xs/sm/md/lg scale */
+  --space-about-section-gap: 110px; /* About Us top-level section margin-top (headline and body blocks alike; video sits flush against its preceding headline with 0 gap), confirmed via getComputedStyle on the live site's sibling sections; doesn't fit xs/sm/md/lg scale */
 
   /* Layout */
   --container-max-width: 1260px;
