@@ -51,10 +51,11 @@ import AnimatedHeadline from './hero/AnimatedHeadline.astro';
   @media (max-width: 767px) {
     .who-we-are__body-section {
       /* padding-top overridden further below the live-measured 20px value —
-         mobile-only consistency tuning so the gap below "Who we are" matches
-         the ~100px used below every other headline at phone width, per user
-         request. padding-bottom is unchanged, still the live-measured value. */
-      padding-top: 90px;
+         mobile-only consistency tuning. Was 90px (matching "below What we
+         do"'s 100px total), then halved to 40px per user request that the
+         gap below "Who we are" was too much. padding-bottom is unchanged,
+         still the live-measured value. */
+      padding-top: 40px;
       padding-bottom: 10px;
     }
 
