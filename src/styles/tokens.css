@@ -163,7 +163,7 @@
     --space-section-gap: 40px; /* down from 110px (desktop) — at phone width, the desktop value made every section headline (About us/What we do/Why we do it/Our parks/Who we are) sit lopsided in its surrounding whitespace, since this margin-top has no equivalent margin-bottom on the same box. Reduced to bring above/below spacing closer to symmetric across all five headlines, verified via live getBoundingClientRect deltas at phone width. */
 
     --space-about-video-gap: 50px; /* down from 70px (desktop) — mobile-only tuning so the video's own top padding matches its own bottom padding (--space-md, 50px), which were asymmetric (90px/50px) at this breakpoint before this change. Per user request, this takes priority over keeping "About us to video" pinned at exactly 100px (it drops to ~60px) — the video's own surrounding whitespace looking even was the actual visual complaint. */
-    --space-parks-grid-gap-top: 90px; /* up from 80px (desktop) — same mobile-only consistency tuning: brings the gap below "Our parks" in line with the ~100px used below every other headline at phone width. */
+    --space-parks-grid-gap-top: 40px; /* down from 80px (desktop) — mobile-only: "Our parks" was 100px from its headline to the first visible photo (10px headline-trailing + 90px grid-section's own padding), while "What we do" reaches its cream-colored section box in only 50px. Reduced so "Our parks" sits as close to its photos (headline-trailing 10px + this 40px = 50px total) as "What we do" sits to its cream space, per user request. */
     --space-parks-grid-gap-bottom: 50px; /* up from 10px (desktop) — mobile-only: brings the gap above "Who we are" in line with the ~100px used above every other headline at phone width. */
   }
 }
