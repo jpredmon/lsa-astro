@@ -15,6 +15,7 @@
   --color-cream-2: #f8f5ef; /* WP accent-4 */
   --color-cream-3: #fcf8f1; /* WP accent-8 */
   --color-highlight-yellow: #eed338; /* WP accent-1 — underline highlight marker color */
+  --color-logo-red: #f23457; /* sampled from logo-master.png's outer ring — used for photo credit-link text instead of --color-highlight-yellow, which measured 1.38:1 contrast on cream (fails WCAG); this red measures 3.57:1 on cream / 3.89:1 on white, clearing the 3:1 large-text threshold at --font-size-caption's bold weight */
   --color-button-yellow: #fec415; /* WP --vamtam-btn-bg-color */
 
   --color-button-bg: var(--color-button-yellow);
@@ -92,7 +93,7 @@
   --letter-spacing-h6: normal;
   --font-weight-h6: var(--font-weight-bold);
 
-  --font-size-caption: 12.8px; /* shared caption font-size across HeroPhoto and ParkPhoto, confirmed live */
+  --font-size-caption: 19px; /* shared caption font-size across HeroPhoto and ParkPhoto — deliberately bumped from the live-measured 12.8px to WCAG's ~14pt/18.7px bold "large text" threshold, so --color-logo-red's contrast ratio (3.57:1–3.89:1) qualifies under the relaxed 3:1 requirement instead of needing 4.5:1. A documented accessibility-driven deviation from strict live replication, not a live value. */
 }
 
 @media (max-width: 1024px) {
