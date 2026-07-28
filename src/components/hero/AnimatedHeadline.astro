@@ -162,6 +162,22 @@ const {
     animation-duration: 8s;
   }
 
+  /* Respect the OS-level motion-reduction setting: the pulse and the
+     underline's infinite draw/fade loop both stop, freezing on the fully
+     drawn/visible end state instead of looping forever. */
+  @media (prefers-reduced-motion: reduce) {
+    .headline {
+      animation: none;
+    }
+
+    .headline__underline path {
+      animation: none;
+      stroke-dasharray: 1500, 1500;
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
   /* Combines the live site's two separately-JS-toggled keyframes
      (elementor-headline-dash + hide-highlight) into one self-contained loop.
      Two variants because draw (1200ms) and fade (400ms) are constant in
