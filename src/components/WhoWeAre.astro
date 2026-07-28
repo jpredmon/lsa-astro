@@ -50,11 +50,11 @@ import AnimatedHeadline from './hero/AnimatedHeadline.astro';
 
   @media (max-width: 767px) {
     .who-we-are__body-section {
-      /* live-measured via getComputedStyle on the live site's CSSOM at the ≤767px breakpoint:
-         the text-editor widget's own padding drops from 20px all-around to 10px 0 0 0 (asymmetric),
-         while its e-con-inner parent's 10px top/bottom padding is unchanged — folded total becomes
-         20px top (10+10) / 10px bottom (10+0), replacing the desktop/tablet 30px/30px above */
-      padding-top: 20px;
+      /* padding-top overridden further below the live-measured 20px value —
+         mobile-only consistency tuning so the gap below "Who we are" matches
+         the ~100px used below every other headline at phone width, per user
+         request. padding-bottom is unchanged, still the live-measured value. */
+      padding-top: 90px;
       padding-bottom: 10px;
     }
 
