@@ -5,8 +5,8 @@ import HeroPhoto from './hero/HeroPhoto.astro';
 
 <section class="hero" aria-label="Hero">
   <div class="hero__intro">
-    <h4 class="hero__kicker">Our mission is simple</h4>
-    <AnimatedHeadline plainText="Make Lawrence" highlightedText="Skateable" />
+    <p class="hero__kicker">Our mission is simple</p>
+    <AnimatedHeadline as="h1" plainText="Make Lawrence" highlightedText="Skateable" />
   </div>
   <div class="hero__photo-wrap">
     <HeroPhoto />
@@ -27,6 +27,11 @@ import HeroPhoto from './hero/HeroPhoto.astro';
 
   .hero__kicker {
     margin: 0 0 var(--space-xs);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
+    letter-spacing: var(--letter-spacing-h4);
+    text-transform: var(--text-transform-h4);
   }
 
   .hero__photo-wrap {
