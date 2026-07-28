@@ -159,5 +159,7 @@
     --font-size-h6: 12px;
     --line-height-h6: 1.25em;
     --letter-spacing-h6: 1px;
+
+    --space-section-gap: 40px; /* down from 110px (desktop) — at phone width, the desktop value made every section headline (About us/What we do/Why we do it/Our parks/Who we are) sit lopsided in its surrounding whitespace, since this margin-top has no equivalent margin-bottom on the same box. Reduced to bring above/below spacing closer to symmetric across all five headlines, verified via live getBoundingClientRect deltas at phone width. */
   }
 }

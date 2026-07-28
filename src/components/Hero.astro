@@ -39,4 +39,14 @@ import HeroPhoto from './hero/HeroPhoto.astro';
     margin: 0 auto;
     padding: 0 var(--space-sm) var(--space-lg);
   }
+
+  @media (max-width: 767px) {
+    .hero__photo-wrap {
+      /* Reduced from --space-lg (60px) so the gap above "About us" (this
+         padding + --space-section-gap's mobile value) roughly matches the
+         gap below it (the About Us video's own leading padding), instead
+         of sitting lopsided. */
+      padding-bottom: 10px;
+    }
+  }
 </style>
