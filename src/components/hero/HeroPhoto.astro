@@ -28,10 +28,9 @@ const heroMobile = await getImage({ src: heroMobileSrc, width: 480, height: 360,
     />
   </picture>
   <figcaption class="hero-photo__caption">
-    <a href={CREDIT_URL} target="_blank" rel="noopener" class="hero-photo__credit-link">
-      <strong>Build-a-Board 2024</strong>
-    </a>
-    - Photo: Nicholas Ward
+    <a href={CREDIT_URL} target="_blank" rel="noopener" class="hero-photo__credit-link"
+      ><strong>Build-a-Board 2024</strong></a
+    > - Photo: Nicholas Ward
   </figcaption>
 </figure>
 
@@ -51,7 +50,12 @@ const heroMobile = await getImage({ src: heroMobileSrc, width: 480, height: 360,
      position: static directly below the image. */
   .hero-photo__caption {
     margin: var(--space-xs) 0 0;
-    font-size: var(--font-size-caption);
+    /* PREVIEW: bumped from --font-size-caption (12.8px) to 19px — WCAG's
+       "large text" threshold for bold text is 14pt (~18.7px). At this size,
+       the credit-link color below only needs a 3:1 contrast ratio instead
+       of 4.5:1. Scoped to this caption only, not applied to the shared
+       token or ParkPhoto yet. */
+    font-size: 19px;
     color: var(--color-ink);
     background-color: transparent;
     text-align: center;
@@ -62,6 +66,10 @@ const heroMobile = await getImage({ src: heroMobileSrc, width: 480, height: 360,
   }
 
   .hero-photo__credit-link strong {
-    color: var(--color-highlight-yellow);
+    /* PREVIEW: logo's exact red (sampled from logo-master.png), replacing
+       --color-highlight-yellow (1.38:1 on cream, failed WCAG). At this
+       caption's 19px bold size, red-on-cream measures 3.57:1, clearing
+       the 3:1 large-text threshold. */
+    color: #f23457;
   }
 </style>
